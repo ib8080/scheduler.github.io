@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 3: Сетка и состояния — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 3, "track": "CSS", "emoji": "🧩", "title": "Сетка и состояния", "intro": "Карточек становится больше, и они начинают спорить за место. Сегодня — CSS Grid, который расставляет их сам, и классы-состояния: выполнено, активно, выбрано.", "whatYouLearn": ["CSS Grid и minmax(0, 1fr)", "flex-wrap и переполнение", "классы-состояния вместо :hover", "тап-зоны не меньше 44px"], "steps": [{"type": "theory", "tag": "теория", "title": "Сетка, которая сама решает", "html": "<p><strong>Grid</strong> раскладывает карточки по колонкам. На телефоне — одна колонка, на планшете — две. <code>minmax(0, 1fr)</code> разрешает колонке сжиматься, чтобы длинный текст не растягивал всю сетку.</p>", "code": ".dashboard {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr);\n  gap: 12px;\n}\n\n@media (min-width: 640px) {\n  .dashboard {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}", "tip": "Без minmax(0, …) одна длинная строка может раздвинуть всю карточку."}, {"type": "theory", "tag": "теория", "title": "Состояния — это классы", "html": "<p>Выполненная задача, активная вкладка, выбранная карточка — это <strong>состояния</strong>. Их описывают отдельными классами, а не псевдоклассом :hover: на телефоне мыши нет.</p>", "code": ".task.done {\n  text-decoration: line-through;\n  opacity: 0.6;\n}\n\n.nav button.active {\n  color: #6366f1;\n  font-weight: 700;\n}", "tip": "В JS состояние — это класс: element.classList.toggle('done', isDone)."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Зачем minmax(0, 1fr)?", "options": ["чтобы колонка могла сжиматься и длинный текст не растягивал сетку", "чтобы задать минимальный шрифт", "чтобы включить анимацию"], "answer": 0, "explain": "Минимум 0 позволяет колонке ужаться. Иначе содержимое диктует ширину."}, {"text": "Как показать, что задача выполнена?", "options": ["добавить класс done и описать его в CSS", "написать в тексте «выполнено»", "сделать кнопку серой через JS"], "answer": 0, "explain": "Класс — это состояние. Стили живут в CSS, а не в обработчиках."}]}, {"type": "playground", "tag": "практика", "title": "Поставь сетку", "task": "Сделай из двух карточек сетку: <code>display: grid</code> и две колонки через <code>grid-template-columns</code>.", "start": "<style>\n  .grid {\n    /* твой код */\n  }\n  .card { background: #eef2ff; border-radius: 12px; padding: 16px; }\n</style>\n\n<div class=\"grid\">\n  <div class=\"card\">Список дел</div>\n  <div class=\"card\">Заметки</div>\n</div>\n", "check": ["display: grid", "grid-template-columns"], "hint": "Внутри .grid: <code>display: grid;</code> и <code>grid-template-columns: repeat(2, minmax(0, 1fr));</code>.", "success": "Сетка на месте. Теперь карточки не будут прыгать при добавлении задач."}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Что задаёт свойство gap?", "options": ["расстояние между элементами сетки", "внутренний отступ карточки", "размер шрифта"], "answer": 0, "explain": "gap — это промежутки, без margin-костылей."}, {"text": "Почему тап-зона кнопки должна быть не меньше 44px?", "options": ["по ней нужно попадать пальцем", "так требует CSS Grid", "иначе не сохранится localStorage"], "answer": 0, "explain": "44×44 — комфортный минимум для пальца. Это забота о пользователе, а не формальность."}]}], "next": "lesson-04.html"});
+  </script>
+</body>
+</html>

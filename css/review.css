@@ -1,0 +1,112 @@
+/* review.css — экран «Итоги месяца»: выбор месяца, форма и история. */
+.review-month-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.review-form label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.review-month-row label { margin-bottom: 0; }
+
+.review-month-controls {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.review-select {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 0.9rem;
+  min-height: 40px;
+  background: var(--card);
+  color: var(--text);
+}
+
+.review-status {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 6px 0 12px;
+}
+
+.review-status.warn { color: #b45309; font-weight: 600; }
+
+.review-form textarea {
+  width: 100%;
+  min-height: 72px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  font: inherit;
+  resize: vertical;
+  margin-bottom: 12px;
+}
+
+#save-review {
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  padding: 14px;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.history-title { font-size: 1rem; margin: 20px 0 10px; }
+
+/* Карточка истории — кнопка: целиком открывает итог на редактирование */
+.history-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.history-card.selected { outline: 2px solid var(--accent); }
+
+.history-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.history-edit {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.history-field { display: block; margin-top: 8px; }
+
+.history-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.history-value {
+  display: block;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.history-field.empty .history-value { color: var(--muted); }
+
+.empty-hint { color: var(--muted); font-size: 0.85rem; }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 2: Цвет, отступы, телефон — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 2, "track": "CSS", "emoji": "🎨", "title": "Цвет, отступы, телефон", "intro": "Скелет есть, но выглядит как документ из 1998 года. Сегодня — стили: цвет, шрифт, отступы и первый мобильный вид. Тут же выяснится, почему кнопки «слипаются» и как это лечить.", "whatYouLearn": ["селекторы, классы и каскад", "box model: margin, padding, border", "flexbox для строк и кнопок", "переменные CSS и media queries"], "steps": [{"type": "theory", "tag": "теория", "title": "Селектор — это прицел", "html": "<p>CSS отвечает на вопрос «как выглядит». Селектор по классу начинается с точки: он попадёт во все элементы с этим классом.</p>", "code": ".task {\n  color: #0f172a;\n  font-size: 16px;\n}\n\n.task.done {\n  text-decoration: line-through;\n  opacity: 0.6;\n}", "tip": "Классы пиши по смыслу: .task, .done, .active — а не .red или .big-box."}, {"type": "theory", "tag": "теория", "title": "Коробка внутри коробки", "html": "<p>Каждый элемент — коробка. <strong>padding</strong> — отступ внутри, от текста до края. <strong>margin</strong> — отступ снаружи, между коробками. <strong>box-sizing: border-box</strong> избавляет от сюрпризов с шириной.</p>", "code": "* { box-sizing: border-box; }\n\n.card {\n  padding: 16px;\n  margin-bottom: 12px;\n  border-radius: 14px;\n  background: #fff;\n}", "tip": "Если «всё поехало» — сначала посмотри на padding и фиксированные width."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Что сдвинет текст от края карточки?", "options": ["margin", "padding", "border"], "answer": 1, "explain": "padding — внутренний отступ, margin — внешний. Текст от края двигает padding."}, {"text": "Почему на телефоне появляется горизонтальная прокрутка?", "options": ["карточка шире экрана из-за фиксированной ширины", "в HTML нет doctype", "слишком много цветов"], "answer": 0, "explain": "Фиксированная ширина вроде 500px на экране 360px вылезает за край."}]}, {"type": "playground", "tag": "практика", "title": "Оформи карточку", "intro": "Почувствуй, как CSS меняет страницу мгновенно.", "task": "Сделай заголовок синим, а карточку — с внутренними отступами 16px и скруглением 14px.", "start": "<style>\n  .card {\n    /* твой код */\n  }\n</style>\n\n<div class=\"card\">\n  <h1>Мой день</h1>\n</div>\n", "check": ["color", "padding", "border-radius"], "hint": "Внутри .card напиши <code>color: #2563eb;</code>, <code>padding: 16px;</code>, <code>border-radius: 14px;</code>.", "success": "Красота! Ты только что сделал первый настоящий стиль ежедневника."}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Чем padding отличается от margin?", "options": ["padding внутри элемента, margin снаружи", "margin внутри, padding снаружи", "это одно и то же"], "answer": 0, "explain": "Padding — «вата» внутри коробки, margin — расстояние между коробками."}, {"text": "Что делает media query?", "options": ["включает правила при определённой ширине экрана", "загружает картинку", "меняет шрифт"], "answer": 0, "explain": "Так делают мобильный вид: при ширине меньше 640px включаются другие правила."}]}], "next": "lesson-03.html"});
+  </script>
+</body>
+</html>

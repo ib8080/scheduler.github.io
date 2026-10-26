@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 10: Цели по SMART — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 10, "track": "Цели", "emoji": "🎯", "title": "Цели по SMART", "intro": "«Хочу учиться лучше» — это не цель, а пожелание. Превратим его в цель, которую можно выполнить и проверить.", "whatYouLearn": ["5 критериев SMART и срок", "модальное окно с подтверждением", "связь цели с итогами месяца", "сортировка целей по дате"], "steps": [{"type": "theory", "tag": "теория", "title": "Плохая цель и хорошая", "html": "<p><strong>S</strong> — конкретная, <strong>M</strong> — измеримая, <strong>A</strong> — достижимая, <strong>R</strong> — значимая, <strong>T</strong> — с ограниченным сроком.</p><p>«Хочу хорошо учиться» → «Сдать физику на 5 к 20 декабря, занимаясь по 40 минут в день».</p>", "code": "Цель: сдать физику на 5\nСрок: 2026-12-20\nПриоритет: высокий\nПроверка: оценка в дневнике", "tip": "Если цель нельзя проверить — это не цель, а настроение."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Какая цель сформулирована по SMART?", "options": ["Сдать физику на 5 к 20 декабря, занимаясь 40 минут в день", "Хочу хорошо учиться", "Стать умнее"], "answer": 0, "explain": "Есть конкретика, измеримость и срок. Остальные — пожелания."}, {"text": "Зачем чекбокс «добавить в итоги месяца»?", "options": ["чтобы выполненная цель попала в достижения автоматически", "чтобы цель удалилась", "чтобы начислился двойной опыт"], "answer": 0, "explain": "Опыт — отдельно, а запись в итоги — по желанию: иногда цель личная."}]}, {"type": "playground", "tag": "практика", "title": "Форма цели", "task": "Сделай форму цели: поле названия, поле даты (<code>type=\"date\"</code>) и список критериев SMART.", "start": "<form>\n  <!-- название, дата, критерии -->\n</form>\n", "check": ["<input", "type=\"date\"", "<ul"], "hint": "<input type=\"text\" placeholder=\"Цель\"><input type=\"date\"><ul><li>S — конкретная</li></ul>", "success": "Форма есть. Дальше — сортировка по дате и отметка выполнения."}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Цель без даты — это…", "options": ["пожелание", "план", "проект"], "answer": 0, "explain": "Срок превращает желание в задачу с дедлайном."}, {"text": "Сколько опыта за цель с высоким приоритетом в нашем ежедневнике?", "options": ["60", "10", "5"], "answer": 0, "explain": "Цель — крупнее задачи, поэтому и награда больше: 60 / 45 / 30."}]}], "next": "lesson-11.html"});
+  </script>
+</body>
+</html>

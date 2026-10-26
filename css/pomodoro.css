@@ -1,0 +1,120 @@
+/* pomodoro.css — блок «Помодоро»: таймер, настройки, задачи и сообщения. */
+.pomodoro-controller { text-align: center; padding: 4px 0 2px; }
+
+.pomodoro-phase {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.pomodoro-timer {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.pomodoro-current {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+.pomodoro-controls {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 8px;
+}
+
+.pomodoro-controls .primary-btn,
+.pomodoro-controls .secondary-btn { margin-top: 0; }
+
+.pomodoro-message {
+  min-height: 2.4em;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.pomodoro-message.workDone,
+.pomodoro-message.breakDone { color: #15803d; }
+
+.pomodoro-message.pause,
+.pomodoro-message.stop { color: var(--muted); font-weight: 500; }
+
+.pomodoro-settings {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pomodoro-setting {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex: 1;
+  min-width: 0;
+}
+
+.pomodoro-minutes {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px;
+  font: inherit;
+  font-size: 0.9rem;
+  background: var(--card);
+  color: var(--text);
+}
+
+.pomodoro-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.pomodoro-task-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.pomodoro-task-row.active { background: var(--accent-soft); }
+
+.pomodoro-task-text {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+  padding: 8px 4px;
+  overflow-wrap: anywhere;
+}
+
+.pomodoro-task-row.active .pomodoro-task-text { color: var(--accent); font-weight: 600; }
+
+/* Выполненные задачи помодоро */
+.pomodoro-task-row .task-check { flex-shrink: 0; }
+.pomodoro-task-row .xp-chip { flex-shrink: 0; }
+.pomodoro-task-row.done .pomodoro-task-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+  color: var(--text);
+  font-weight: 400;
+}
+.pomodoro-task-row .pomodoro-task-text:disabled { cursor: default; }

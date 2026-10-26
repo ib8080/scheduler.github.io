@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 4: Оживи список — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 4, "track": "JavaScript", "emoji": "⚡", "title": "Оживи список", "intro": "Пора научить страницу реагировать: клик по кнопке — новая задача, галочка — зачёркнутый текст. JavaScript пока живёт только в памяти: обнови страницу — всё исчезнет. Так и должно быть сегодня.", "whatYouLearn": ["переменные, функции и массивы", "поиск элементов и createElement", "события click, change и Enter", "чтение ошибок в консоли"], "steps": [{"type": "theory", "tag": "теория", "title": "Данные отдельно, экран отдельно", "html": "<p>Хорошая привычка: сначала <strong>данные</strong> (массив задач), потом <strong>экран</strong> (то, что видно). Меняем массив — перерисовываем список.</p>", "code": "const tasks = [];\n\nfunction addTask(text) {\n  tasks.push({ text: text, done: false });\n}\n\naddTask('Математика');\naddTask('Английский');", "tip": "Массив объектов удобнее, чем массив строк: у задачи есть текст и состояние."}, {"type": "theory", "tag": "теория", "title": "Найти и изменить", "html": "<p><strong>DOM</strong> — это дерево элементов страницы. Мы находим элемент, создаём новый и добавляем на страницу. Текст ставим через <strong>textContent</strong>: он безопасен, в отличие от innerHTML.</p>", "code": "const list = document.querySelector('#list');\nconst row = document.createElement('li');\nrow.textContent = 'Новая задача';\nlist.append(row);", "tip": "innerHTML с текстом пользователя опасен: он вставит разметку как код."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Что делает addEventListener('click', fn)?", "options": ["вызывает fn при клике по элементу", "вызывает fn один раз при загрузке", "меняет текст элемента"], "answer": 0, "explain": "Это подписка на событие: браузер вызовет fn, когда пользователь кликнет."}, {"text": "Почему innerHTML с текстом пользователя — плохая идея?", "options": ["можно случайно вставить разметку и сломать страницу", "innerHTML всегда медленнее в сто раз", "innerHTML нельзя использовать с числами"], "answer": 0, "explain": "Пользователь может ввести тег — и страница изменится. Используй textContent."}]}, {"type": "playground", "tag": "практика", "title": "Счётчик кликов", "intro": "Самое маленькое настоящее взаимодействие.", "task": "Сделай так, чтобы при клике по кнопке счётчик увеличивался на 1.", "start": "<button id=\"b\">Кликни</button>\n<p id=\"out\">0</p>\n\n<script>\n  // найди элементы и добавь обработчик\n<\/script>\n", "check": ["addeventlistener", "click", "textcontent"], "hint": "let count = 0; b.addEventListener('click', () => { count++; out.textContent = count; });", "success": "Работает! Это и есть основа любой интерактивности."}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Где искать ошибку JavaScript?", "options": ["в консоли браузера (F12)", "в CSS-файле", "в заголовке страницы"], "answer": 0, "explain": "Консоль покажет файл, строку и тип ошибки — первое место для поиска."}, {"text": "Что делает event.preventDefault()?", "options": ["отменяет стандартное поведение события", "удаляет элемент", "останавливает таймер"], "answer": 0, "explain": "Например, для формы — чтобы страница не перезагружалась."}]}], "next": "lesson-05.html"});
+  </script>
+</body>
+</html>

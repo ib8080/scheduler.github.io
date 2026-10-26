@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 7: Файлы, модули и опыт — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 7, "track": "Архитектура", "emoji": "🗂️", "title": "Файлы, модули и опыт", "intro": "Один файл на 800 строк — это боль. Разложим код по полочкам и добавим первое удовольствие от работы: опыт, уровни и серию дней.", "whatYouLearn": ["модуль на IIFE и window.App", "порядок подключения скриптов", "XP, уровни и серия дней", "почему опыт нельзя начислить дважды"], "steps": [{"type": "theory", "tag": "теория", "title": "Один объект вместо свалки", "html": "<p>Модуль — это функция, которая сразу вызывается и прячет свои переменные внутри. Наружу отдаём только нужное, через общий объект <strong>window.App</strong>.</p>", "code": "(function (App) {\n  'use strict';\n\n  function addXP(amount) {\n    App.state.xp += amount;\n  }\n\n  App.xp = { addXP: addXP };\n})(window.App = window.App || {});", "tip": "Порядок подключения важен: config → utils → storage → state → экраны → app.js."}, {"type": "theory", "tag": "теория", "title": "Опыт без дюпов", "html": "<p>Опыт начисляют один раз за задачу. Для этого у задачи есть флаг <strong>xpGiven</strong>: отметил — начислил, снял галочку — забрал обратно, повторил — не начислил второй раз.</p>", "code": "function toggleTask(task) {\n  if (task.done && !task.xpGiven) {\n    task.xpGiven = true;\n    addXP(15);\n  } else if (!task.done && task.xpGiven) {\n    task.xpGiven = false;\n    addXP(-15);\n  }\n}", "tip": "Серия дней — это сколько дней подряд ты получал опыт. Пропустил день — начинается заново."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Зачем window.App?", "options": ["один общий объект вместо десятков глобальных переменных", "чтобы код работал быстрее", "чтобы подключить React"], "answer": 0, "explain": "Одна точка входа — и порядок загрузки понятен, и конфликтов имён нет."}, {"text": "Почему опыт не должен начисляться дважды?", "options": ["иначе можно «нафармить» XP, дёргая галочку туда-обратно", "иначе браузер тормозит", "так требует localStorage"], "answer": 0, "explain": "Флаг xpGiven защищает от дюпа. Игра должна быть честной к самому себе."}]}, {"type": "playground", "tag": "практика", "title": "Собери модуль", "task": "Создай <code>window.App</code>, положи в него состояние с опытом и функцию <code>addXP</code>, которая увеличивает опыт. Выведи результат.", "start": "<script>\nwindow.App = window.App || {};\n\n// state, addXP, вызов\n<\/script>\n", "check": ["window.app", "addxp", "console.log"], "hint": "App.state = { xp: 0 }; App.addXP = (n) => { App.state.xp += n; }; App.addXP(15); console.log(App.state.xp);", "success": "Модуль собран. Так будет выглядеть весь проект."}, {"type": "checklist", "tag": "практика", "title": "Проверь в проекте", "items": ["Все файлы подключены в правильном порядке", "config.js идёт первым, app.js — последним", "После разбиения на файлы ничего не сломалось"]}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Где хранить опыт за задачу по приоритету?", "options": ["в config.js", "в CSS", "в localStorage"], "answer": 0, "explain": "Константы в одном файле — легко менять баланс игры."}, {"text": "Что даёт IIFE (function () { }) ()?", "options": ["свою область видимости и отсутствие мусора в глобальной", "ускоряет страницу", "включает строгий режим автоматически"], "answer": 0, "explain": "Переменные остаются внутри модуля. Снаружи — только то, что положили в App."}]}], "next": "lesson-08.html"});
+  </script>
+</body>
+</html>

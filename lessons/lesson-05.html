@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 5: Память браузера — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 5, "track": "JavaScript", "emoji": "💾", "title": "Память браузера", "intro": "Сегодня магия: закрыл вкладку — открыл, а задачи на месте. Познакомимся с localStorage и научимся не падать, если там лежит мусор.", "whatYouLearn": ["объект состояния и JSON", "localStorage: setItem и getItem", "save и load в одном месте", "защита от битых данных"], "steps": [{"type": "theory", "tag": "теория", "title": "localStorage — как блокнот", "html": "<p><strong>localStorage</strong> хранит строки в браузере. Объект превращается в строку через <strong>JSON.stringify</strong>, а обратно — через <strong>JSON.parse</strong>. Один ключ приложения — один «блокнот».</p>", "code": "const state = { xp: 15, tasks: [] };\n\nlocalStorage.setItem('school_planner_v3', JSON.stringify(state));\n\nconst saved = JSON.parse(localStorage.getItem('school_planner_v3'));\nconsole.log(saved.xp);", "tip": "Сохранять нужно данные, а не HTML. Тогда интерфейс можно перерисовать как угодно."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Что будет с массивом задач после F5, если его не сохранить?", "options": ["исчезнет", "сохранится сам", "переедет в CSS"], "answer": 0, "explain": "Всё, что живёт только в переменных, теряется при перезагрузке."}, {"text": "Зачем try/catch вокруг JSON.parse?", "options": ["если в хранилище мусор, приложение не упадёт", "чтобы ускорить парсинг", "чтобы данные шифровались"], "answer": 0, "explain": "Битый JSON — обычная история после экспериментов в DevTools."}]}, {"type": "playground", "tag": "практика", "title": "Туда и обратно", "intro": "В песочнице урока localStorage недоступен, поэтому потренируемся на самом формате. С хранилищем поработаешь в проекте.", "task": "Сделай объект настроек, преврати его в JSON через <code>JSON.stringify</code>, распарси обратно через <code>JSON.parse</code> и выведи результат в консоль.", "start": "<script>\nconst settings = { work: 25, rest: 5 };\n\n// stringify → parse → console.log\n<\/script>\n", "check": ["json.stringify", "json.parse", "console.log"], "hint": "const raw = JSON.stringify(settings); const back = JSON.parse(raw); console.log(back);", "success": "Теперь localStorage для тебя — просто блокнот с ключами."}, {"type": "checklist", "tag": "практика", "title": "Проверь в проекте", "intro": "Эти вещи проверяются руками в браузере.", "items": ["Открыл DevTools → Application → Local Storage и увидел один общий ключ", "Добавил задачу, обновил страницу — задача на месте", "Испортил JSON в хранилище руками — приложение не упало"]}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Где хранится localStorage?", "options": ["в браузере ученика", "на сервере школы", "в файле index.html"], "answer": 0, "explain": "Это локальное хранилище браузера: другой компьютер данных не увидит."}, {"text": "Что такое ключ хранилища?", "options": ["имя, по которому лежат данные", "пароль", "номер версии браузера"], "answer": 0, "explain": "Ключ — как подпись на коробке. У приложения один ключ: school_planner_v3."}]}], "next": "lesson-06.html"});
+  </script>
+</body>
+</html>

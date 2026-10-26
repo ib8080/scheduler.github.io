@@ -1,0 +1,136 @@
+/* tasks.css — всё про задачи: строки, приоритеты, XP-чипы, поле создания.
+   Используется блоками «Список дел», «Матрица» и «Расписание». */
+.task-list { min-width: 0; }
+
+.task-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.task-text.done { text-decoration: line-through; opacity: 0.5; }
+
+/* ===== Строка задачи ===== */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+  min-height: 44px;
+  min-width: 0;
+}
+
+.todo-item .todo-text { flex: 1; min-width: 0; }
+
+.task-check {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* ===== Приоритет ===== */
+.priority-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.priority-high { background: #ef4444; }
+.priority-medium { background: #f59e0b; }
+.priority-low { background: #10b981; }
+
+.xp-chip {
+  font-size: 0.7rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 6px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Иконковые кнопки (удаление / смена приоритета) */
+.icon-btn {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  padding: 6px 8px;
+  border-radius: 8px;
+  min-height: 36px;
+  flex-shrink: 0;
+  background: none;
+}
+.icon-btn:hover { background: #f1f5f9; color: var(--danger); }
+.icon-btn.danger { color: var(--danger); }
+.priority-cycle { font-size: 1rem; }
+.priority-cycle:hover { color: var(--muted); }
+
+/* ===== Поле создания задачи ===== */
+.todo-input-wrap {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.todo-add-row {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+  align-items: center;
+}
+
+.todo-text-input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  min-height: 44px;
+}
+
+.task-time-input {
+  flex: 0 0 auto;
+  width: 96px;
+  min-width: 0;
+  padding: 10px 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  min-height: 44px;
+}
+
+.add-btn {
+  background: var(--accent);
+  color: white;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  min-width: 44px;
+}
+
+/* ===== Приоритеты: кнопки-кружки ===== */
+.priority-buttons { display: flex; gap: 6px; }
+
+.priority-btn {
+  width: 30px;
+  height: 30px;
+  min-height: 30px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  font-size: 0.8rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Активный кружок не увеличивается — иначе он вылезает за отступ и затирает соседей */
+.priority-btn.active { border-color: currentColor; background: rgba(15, 23, 42, 0.04); }
+.priority-btn.high { color: #ef4444; }
+.priority-btn.medium { color: #f59e0b; }
+.priority-btn.low { color: #10b981; }

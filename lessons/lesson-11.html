@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 11: Помодоро и таймеры — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 11, "track": "Таймеры", "emoji": "⏱️", "title": "Помодоро и таймеры", "intro": "25 минут работы, 5 минут отдыха. Звучит просто, но чтобы таймер не врал после перезагрузки, нужно хранить не счётчик, а время окончания. Сегодня — самый инженерный урок.", "whatYouLearn": ["setInterval и Date.now", "метка endAt вместо счётчика", "пауза и продолжение", "перетаскивание карточек"], "steps": [{"type": "theory", "tag": "теория", "title": "Считать не тики, а время", "html": "<p>Если хранить «осталось 1500 секунд» и вычитать по секунде, в фоновой вкладке браузер притормозит таймер — и время уплывёт. Надёжнее запомнить <strong>момент окончания</strong> и каждый раз считать разницу.</p>", "code": "state.endAt = Date.now() + 25 * 60 * 1000;\n\nsetInterval(function () {\n  const left = Math.max(0, Math.round((state.endAt - Date.now()) / 1000));\n  render(left);\n}, 1000);", "tip": "Пауза: сохрани остаток в remaining и обнули endAt. Продолжение: endAt = сейчас + remaining."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Почему счётчик «минус один каждую секунду» плох?", "options": ["в фоновой вкладке таймеры режутся, и время уплывает", "счётчик нельзя сохранить", "число становится строкой"], "answer": 0, "explain": "Браузер экономит батарею и замедляет интервалы. Метка времени решает проблему."}, {"text": "Что хранить, чтобы таймер пережил перезагрузку?", "options": ["время окончания endAt", "количество тиков", "текст кнопки"], "answer": 0, "explain": "По endAt всегда можно пересчитать остаток, даже после закрытия вкладки."}]}, {"type": "playground", "tag": "практика", "title": "Часы тикают", "task": "Выведи текущее время в консоль каждую секунду через <code>setInterval</code>.", "start": "<script>\n// setInterval + new Date\n<\/script>\n", "check": ["setinterval", "new date", "console.log"], "hint": "setInterval(() => console.log(new Date().toLocaleTimeString()), 1000);", "success": "Таймер больше не магия — это просто разница времени."}, {"type": "checklist", "tag": "практика", "title": "Проверь в проекте", "items": ["Запустил таймер и перезагрузил страницу — отсчёт продолжился", "Работа и перерыв переключаются автоматически", "Порядок карточек сохраняется после F5"]}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Что делает clearInterval?", "options": ["останавливает повторяющийся таймер", "очищает консоль", "удаляет localStorage"], "answer": 0, "explain": "Если не остановить — интервалы будут копиться при каждой перерисовке."}, {"text": "Почему на паузе сохраняют remaining, а не endAt?", "options": ["чтобы продолжить с того же места", "чтобы сбросить таймер", "так требует браузер"], "answer": 0, "explain": "endAt в прошлом — это «время вышло». remaining — сколько осталось на самом деле."}]}], "next": "lesson-12.html"});
+  </script>
+</body>
+</html>

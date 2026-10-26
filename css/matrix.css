@@ -1,0 +1,43 @@
+/* matrix.css — блок «Матрица Эйзенхауэра». */
+.matrix-quad {
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+  min-width: 0;
+}
+.quad-q1 { background: #fef2f2; }
+.quad-q2 { background: #fffbeb; }
+.quad-q3 { background: #eff6ff; }
+.quad-q4 { background: #f8fafc; }
+
+.matrix-quad summary {
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  min-height: 28px;
+}
+
+.quad-list { margin-top: 8px; min-width: 0; }
+
+.quad-task {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  min-width: 0;
+}
+
+.quad-task-text { font-size: 0.85rem; }
+
+/* Поле создания внутри квадранта — компактнее, чем в списке дел */
+.matrix-quad .todo-input-wrap { margin-top: 8px; gap: 6px; }
+
+.matrix-quad .todo-text-input,
+.matrix-quad .add-btn {
+  min-height: 38px;
+  font-size: 0.85rem;
+}
+
+.matrix-quad .todo-text-input { padding: 8px; }
+.matrix-quad .add-btn { padding: 0 12px; }

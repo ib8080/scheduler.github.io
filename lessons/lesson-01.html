@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 1: Каркас из тегов — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 1, "track": "HTML", "emoji": "🧱", "title": "Каркас из тегов", "intro": "Ежедневник начинается не с красоты, а со скелета. Сегодня ты соберёшь страницу, которую понимает браузер: заголовок, список дел, поле для заметок. Стилей пока нет — только смысл.", "whatYouLearn": ["теги, атрибуты и вложенность", "структура документа: doctype, head, body", "чекбокс, кнопка и поле ввода", "семантика вместо «div на всё»"], "steps": [{"type": "theory", "tag": "теория", "title": "Тег — это ярлык", "html": "<p>Браузер читает файл сверху вниз и превращает <strong>теги</strong> в элементы страницы. Тег — это ярлык: «это заголовок», «это список», «это кнопка».</p><p>Открыл тег — закрой его. Всё, что внутри, называется <strong>вложенностью</strong>.</p>", "code": "<h1>Мой день</h1>\n<p>Сегодня три дела.</p>\n<ul>\n  <li>Математика</li>\n  <li>Английский</li>\n</ul>", "tip": "Если что-то не отображается — сначала проверь, закрыт ли тег."}, {"type": "theory", "tag": "теория", "title": "Скелет страницы", "html": "<p>У любой страницы есть <strong>head</strong> (невидимая служебная часть: заголовок вкладки, кодировка) и <strong>body</strong> (всё, что видно). Чекбокс делается тегом <code>input</code> с типом <code>checkbox</code>.</p>", "code": "<!DOCTYPE html>\n<html lang=\"ru\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Мой ежедневник</title>\n</head>\n<body>\n  <h1>Привет!</h1>\n</body>\n</html>", "tip": "Кодировка UTF-8 — иначе вместо «ё» будут кракозябры."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Какой тег создаст галочку-чекбокс?", "options": ["<input type=\"checkbox\">", "<button>", "<checkbox>"], "answer": 0, "explain": "input с типом checkbox — единственный правильный вариант. Тега checkbox не существует."}, {"text": "Где живёт всё, что видно на странице?", "options": ["в head", "в body", "в title"], "answer": 1, "explain": "head — служебная часть, body — видимая. title показывается во вкладке браузера."}]}, {"type": "playground", "tag": "практика", "title": "Собери сам", "intro": "Сейчас ты соберёшь маленький кусок настоящего ежедневника.", "task": "Сделай заголовок <code>h1</code> «Мой день» и список из трёх дел через <code>li</code>.", "start": "<h1>Мой день</h1>\n\n<!-- добавь список ul с тремя li -->\n", "check": ["<h1", "<ul", "<li"], "hint": "Список выглядит так: <code>&lt;ul&gt; &lt;li&gt;дело&lt;/li&gt; &lt;/ul&gt;</code>. Внутри должно быть три <code>li</code>.", "success": "Отлично! Это уже настоящая разметка списка дел."}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "intro": "Три вопроса — и ступень пройдена. Отвечай по одному.", "questions": [{"text": "Что делает атрибут href у ссылки?", "options": ["задаёт адрес, куда ведёт ссылка", "красит ссылку", "меняет размер шрифта"], "answer": 0, "explain": "href — это адрес. Остальное делает CSS."}, {"text": "Почему кнопку нельзя делать из &lt;div&gt;?", "options": ["div не нажимается с клавиатуры и не сообщает, что это кнопка", "div нельзя стилизовать", "у div нет закрывающего тега"], "answer": 0, "explain": "Кнопка — это смысл и доступность, а не только вид."}]}], "next": "lesson-02.html"});
+  </script>
+</body>
+</html>

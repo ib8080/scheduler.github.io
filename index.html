@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>Мой ежедневник</title>
+
+  <!-- Стили: по файлу на компонент/экран -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/tasks.css">
+  <link rel="stylesheet" href="css/matrix.css">
+  <link rel="stylesheet" href="css/schedule.css">
+  <link rel="stylesheet" href="css/week.css">
+  <link rel="stylesheet" href="css/notes.css">
+  <link rel="stylesheet" href="css/pomodoro.css">
+  <link rel="stylesheet" href="css/goals.css">
+  <link rel="stylesheet" href="css/learn.css">
+  <link rel="stylesheet" href="css/review.css">
+  <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+  <main id="app">
+    <!-- ЭКРАН 1: ДАШБОРД -->
+    <section id="screen-dashboard" class="screen active">
+      <header class="screen-header">
+        <div class="header-top">
+          <!-- текст подставляет header.js: h1 пустой, чтобы при загрузке не мелькало приветствие -->
+          <h1 id="app-greeting" class="splash"></h1>
+          <div class="header-controls">
+            <input type="date" id="date-picker" class="date-picker" title="Выбрать день для просмотра архива">
+            <button id="edit-mode-toggle">Редактировать</button>
+          </div>
+        </div>
+        <p id="current-date" class="current-date"></p>
+        <div class="xp-bar">
+          <span id="xp-label">0 XP</span>
+          <div class="xp-track"><div id="xp-fill"></div></div>
+          <span id="streak" title="Серия: сколько дней подряд ты закрываешь задачи">🔥 0</span>
+        </div>
+      </header>
+
+      <div id="dashboard-grid" class="dashboard-grid">
+        <!-- Карточки рендерятся JS -->
+      </div>
+
+      <button id="add-block-btn" class="fab" aria-label="Добавить блок">＋</button>
+    </section>
+
+    <!-- ЭКРАН 2: ОБУЧЕНИЕ -->
+    <section id="screen-learn" class="screen">
+      <h1>Создай свой ежедневник за 12 месяцев</h1>
+      <p class="subtitle">12 ступеней: от первого тега до собственного приложения. Внутри каждого урока — интерактивные задания и живой редактор кода.</p>
+      <div id="learn-progress" class="learn-progress"></div>
+      <div id="steps-list" class="steps-list"></div>
+    </section>
+
+    <!-- ЭКРАН 3: НЕДЕЛЯ -->
+    <section id="screen-week" class="screen">
+      <h1>Неделя</h1>
+      <p id="week-meta" class="week-meta"></p>
+      <p class="subtitle">Расписание повторяется каждую неделю. Заметки привязаны к конкретной дате и не переносятся на следующую неделю.</p>
+      <div id="week-schedule" class="week-schedule"></div>
+    </section>
+
+    <!-- ЭКРАН 4: ЦЕЛИ -->
+    <section id="screen-goals" class="screen">
+      <h1>Цели по SMART</h1>
+      <p class="subtitle">Цель, у которой есть конкретика, измеримость и срок, выполняется в разы чаще.</p>
+      <div class="goals-head">
+        <h2 class="goals-heading">Мои цели</h2>
+        <button id="toggle-done-goals" class="secondary-btn inline">Выполненные (0)</button>
+      </div>
+      <div id="goals-list" class="goals-list"></div>
+      <div id="goals-done" class="goals-list hidden"></div>
+
+      <div id="goal-form" class="goal-form"></div>
+    </section>
+
+    <!-- ЭКРАН 5: ИТОГИ МЕСЯЦА -->
+    <section id="screen-review" class="screen">
+      <h1>Итоги месяца</h1>
+      <div id="review-form" class="review-form"></div>
+      <div id="month-history" class="month-history"></div>
+    </section>
+  </main>
+
+  <!-- НИЖНЯЯ НАВИГАЦИЯ -->
+  <nav class="bottom-nav">
+    <button data-screen="dashboard" class="active">Дневник</button>
+    <button data-screen="learn">Обучение</button>
+    <button data-screen="week">Неделя</button>
+    <button data-screen="goals">Цели</button>
+    <button data-screen="review">Итоги</button>
+  </nav>
+
+  <!-- Модалка выбора нового блока -->
+  <div id="block-picker" class="modal hidden">
+    <div class="modal-content">
+      <h2>Добавить блок</h2>
+      <div id="block-picker-options"></div>
+      <button id="close-picker">Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Логика: порядок подключения важен -->
+  <script src="js/config.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/gamification.js"></script>
+  <script src="js/core/goals.js"></script>
+  <script src="js/core/pomodoro.js"></script>
+  <script src="js/ui/task-controls.js"></script>
+  <script src="js/ui/header.js"></script>
+  <script src="js/ui/navigation.js"></script>
+  <script src="js/ui/block-picker.js"></script>
+  <script src="js/ui/goal-picker.js"></script>
+  <script src="js/blocks/todo-block.js"></script>
+  <script src="js/blocks/matrix-block.js"></script>
+  <script src="js/blocks/notes-block.js"></script>
+  <script src="js/blocks/schedule-block.js"></script>
+  <script src="js/blocks/pomodoro-block.js"></script>
+  <script src="js/blocks/goals-block.js"></script>
+  <script src="js/blocks/registry.js"></script>
+  <script src="js/screens/dashboard.js"></script>
+  <script src="js/screens/learn.js"></script>
+  <script src="js/screens/week.js"></script>
+  <script src="js/screens/goals.js"></script>
+  <script src="js/screens/review.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+/* week.css — экран «Неделя»: карточки дней, расписание и заметки. */
+.week-meta {
+  font-weight: 700;
+  color: var(--accent);
+  margin: 4px 0;
+}
+
+.week-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.day-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  min-width: 0;
+}
+
+.day-card.today { border: 2px solid var(--accent); }
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.day-date { color: var(--muted); font-weight: normal; font-size: 0.8rem; }
+
+.day-schedule { margin-bottom: 12px; min-width: 0; }
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  min-width: 0;
+}
+
+.schedule-item .week-time {
+  flex: 0 0 auto;
+  width: 104px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.schedule-item .week-subject {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.add-schedule-btn {
+  width: 100%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.day-notes textarea,
+.day-notes-area {
+  width: 100%;
+  min-height: 60px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  font: inherit;
+  resize: vertical;
+}

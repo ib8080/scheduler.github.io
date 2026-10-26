@@ -1,0 +1,228 @@
+/* goals.css — вкладка «Цели» (SMART) и блок «Цели» на главной. */
+.goal-form {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin: 20px 0 12px;
+  min-width: 0;
+}
+
+.goals-heading { font-size: 1rem; margin: 0 0 12px; }
+
+.goal-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 12px 0 4px;
+}
+
+.goal-form > .goal-label:first-of-type { margin-top: 0; }
+
+.goal-hint {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.goal-input,
+.goal-textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  font: inherit;
+  font-size: 0.9rem;
+  background: var(--card);
+  color: var(--text);
+  min-width: 0;
+}
+
+.goal-input { min-height: 44px; }
+.goal-textarea { resize: vertical; }
+
+.goal-input.invalid {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+}
+
+.smart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.goal-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+  min-width: 0;
+}
+
+.goal-row .goal-label { margin-top: 0; }
+
+#add-goal { margin-top: 16px; }
+
+/* ===== Список целей ===== */
+.goals-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.goals-head .goals-heading { margin: 0; }
+
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.goal-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  min-width: 0;
+}
+
+.goal-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.goal-card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.goal-card-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.goal-card-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.goal-smart-count { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
+
+.goal-card.done .goal-card-title { text-decoration: line-through; opacity: 0.6; }
+
+/* ===== Описание цели по SMART (модалка) ===== */
+.goal-detail .goal-card-meta { margin: 0 0 12px; }
+
+.goal-smart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.smart-row { display: flex; gap: 10px; align-items: flex-start; }
+.smart-row .smart-badge { margin-top: 2px; }
+
+.smart-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.smart-title { font-weight: 600; font-size: 0.8rem; }
+.smart-value { font-size: 0.85rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.smart-row.empty .smart-value { color: var(--muted); }
+
+.goal-confirm-title { font-size: 0.9rem; color: var(--muted); margin-top: 0; }
+.goal-detail .delete-goal-btn { color: var(--danger); }
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  min-height: 44px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+  margin: 2px 0 0;
+}
+
+/* ===== Блок «Цели» на главной ===== */
+.goals-block-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.goals-block-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 44px;
+}
+
+.goals-block-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.goals-block-due { font-size: 0.75rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+
+.block-action-btn {
+  width: 100%;
+  margin-top: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ===== Выбор целей для блока ===== */
+.goal-picker-list { display: flex; flex-direction: column; margin-bottom: 12px; }
+.goal-picker-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.goal-picker-due { color: var(--muted); font-size: 0.75rem; }

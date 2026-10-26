@@ -1,0 +1,87 @@
+/* schedule.css — блок «Расписание на день» на дашборде:
+   плановые занятия из вкладки «Неделя» и внеплановые задачи. */
+.sched-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.schedule-list {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  min-width: 0;
+}
+
+.day-schedule-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  min-height: 48px;
+  min-width: 0;
+}
+
+.day-schedule-item.planned { background: #f8fafc; }
+.day-schedule-item.extra { background: #f0f9ff; }
+
+/* Внеплановая задача: текст занимает всю строку, кнопки уходят вниз,
+   если места не хватает (узкий телефон). */
+.day-schedule-item .item-subject { order: 1; }
+
+/* Кнопки в строке расписания — компактнее, чтобы название оставалось в одну строку */
+.day-schedule-item .icon-btn { padding: 6px 6px; font-size: 0.85rem; }
+.day-schedule-item .xp-chip { font-size: 0.68rem; padding: 2px 5px; }
+
+.day-schedule-item .xp-chip,
+.day-schedule-item .priority-cycle,
+.day-schedule-item .item-del { order: 2; }
+
+.day-schedule-item .xp-chip { margin-left: auto; }
+
+.day-schedule-item.done .item-subject {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.day-schedule-item .item-time-static {
+  min-width: 70px;
+  flex-shrink: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.day-schedule-item input.item-time {
+  flex: 0 0 auto;
+  width: 78px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.day-schedule-item .item-subject {
+  /* база по содержимому: короткое название остаётся в одной строке с кнопками,
+     длинное — выталкивает приоритет и крест на вторую строку */
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+/* Отступа сверху достаточно: поле создания — общий компонент задачи */
+.extra-add-wrap { margin-top: 16px; }
+
+.planned-empty {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 4px 0;
+}

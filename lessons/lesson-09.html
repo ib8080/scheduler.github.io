@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 9: Итоги месяца — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 9, "track": "Формы", "emoji": "📝", "title": "Итоги месяца", "intro": "Раз в месяц полезно остановиться и посмотреть назад: что сделал, чему научился, что дальше. Сегодня — форма, сохранение, история и правка задним числом.", "whatYouLearn": ["textarea, select и чтение формы", "одна запись на месяц", "история и редактирование", "почему пустая запись — не запись"], "steps": [{"type": "theory", "tag": "теория", "title": "Форма — это разговор", "html": "<p>Длинный текст — <strong>textarea</strong>, выбор из списка — <strong>select</strong>. Значения читаем через <code>value</code>, а не через внутренний HTML.</p>", "code": "<label for=\"month\">Месяц</label>\n<select id=\"month\">\n  <option value=\"2026-09\">Сентябрь 2026</option>\n  <option value=\"2026-10\">Октябрь 2026</option>\n</select>\n\n<label for=\"achieved\">Чего я добился?</label>\n<textarea id=\"achieved\" rows=\"4\"></textarea>", "tip": "Месяц храни как «2026-10»: и читается, и сортируется."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Ты сохраняешь итоги за октябрь второй раз. Что должно произойти?", "options": ["обновится та же запись, а не появится дубль", "создастся вторая запись", "ничего"], "answer": 0, "explain": "Одна запись на месяц: ищем по ключу и обновляем."}, {"text": "Зачем проверять, заполнена ли форма?", "options": ["чтобы не плодить пустые записи в истории", "чтобы форма была красивее", "чтобы XP не начислялся"], "answer": 0, "explain": "Пустая запись засоряет историю и сбивает с толку."}]}, {"type": "playground", "tag": "практика", "title": "Мини-форма итогов", "task": "Собери форму: <code>select</code> с двумя месяцами и <code>textarea</code> для достижений. Добавь подпись <code>label</code>.", "start": "<form>\n  <!-- подпись и select -->\n\n  <!-- подпись и textarea -->\n</form>\n", "check": ["<select", "<option", "<textarea", "<label"], "hint": "<label for=\"m\">Месяц</label><select id=\"m\"><option>Октябрь</option></select><label for=\"a\">Достижения</label><textarea id=\"a\"></textarea>", "success": "Форма готова. Осталось сохранять её в состояние."}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Как открыть сохранённый итог для правки?", "options": ["клик по записи в истории — она подставится в форму", "заполнить заново с нуля", "удалить и создать"], "answer": 0, "explain": "История — это не только память, но и быстрый доступ к правке."}, {"text": "Почему можно заполнить итоги за прошлый месяц?", "options": ["иногда вспоминаешь позже — это нормально и полезно", "это баг", "так требует браузер"], "answer": 0, "explain": "Рефлексия задним числом лучше, чем никакой."}]}], "next": "lesson-10.html"});
+  </script>
+</body>
+</html>

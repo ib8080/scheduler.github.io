@@ -1,0 +1,164 @@
+/* learn.css — экран «Обучение»: прогресс курса, карточки ступеней и модалка урока. */
+.subtitle { color: var(--muted); font-size: 0.9rem; }
+
+/* ===== Прогресс курса ===== */
+.learn-progress {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.learn-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.learn-progress-label { color: var(--text); }
+.learn-progress-xp { color: var(--accent); }
+
+.learn-progress-track {
+  height: 10px;
+  border-radius: 99px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.learn-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), #a855f7);
+  transition: width 0.3s ease;
+}
+
+/* ===== Карточки ступеней ===== */
+.steps-list { display: flex; flex-direction: column; }
+
+.step-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  margin-bottom: 12px;
+  min-width: 0;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.12s ease;
+}
+
+.step-card:hover { border-color: #c7d2fe; }
+.step-card:active { transform: translateY(1px); }
+.step-card.done { border-color: #bbf7d0; }
+
+.step-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  flex: 1;
+}
+
+.month-badge {
+  align-self: flex-start;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 9px;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.step-card-title { font-weight: 700; font-size: 0.98rem; }
+
+.step-desc {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.step-topics { color: #94a3b8; font-size: 0.74rem; }
+
+.step-card-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.step-status {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #b45309;
+  white-space: nowrap;
+}
+
+.step-status.done { color: #15803d; }
+
+.step-open {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ===== Модалка урока ===== */
+.lesson-modal .month-badge { display: inline-block; }
+.lesson-modal h2 { margin: 10px 0 6px; font-size: 1.15rem; }
+.lesson-tagline { color: var(--muted); font-size: 0.9rem; }
+
+.lesson-topics {
+  margin: 10px 0;
+  padding-left: 20px;
+  font-size: 0.88rem;
+}
+
+.lesson-topics li { margin-bottom: 4px; }
+
+.lesson-outcome {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.86rem;
+  margin: 0;
+}
+
+.lesson-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.lesson-actions .primary-btn,
+.lesson-actions .secondary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 0;
+  text-align: center;
+  text-decoration: none;
+}
+
+.lesson-toggle.done {
+  background: #ecfdf5;
+  color: #15803d;
+}

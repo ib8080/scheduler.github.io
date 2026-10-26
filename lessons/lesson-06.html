@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Месяц 6: Неделя и расписание — интерактивный урок</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+  <header class="top">
+    <a class="top-link" href="../index.html">← Ежедневник</a>
+    <div class="track"><div class="track-bar" id="bar"></div></div>
+    <div class="stars" id="stars">⭐ 0</div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <script src="lesson.js"></script>
+  <script>
+    Lesson.render({"month": 6, "track": "JavaScript", "emoji": "📅", "title": "Неделя и расписание", "intro": "У задач появилось время: сегодня, завтра, понедельник. Научимся работать с датами так, чтобы «понедельник» не путался с «26 октября» и наоборот.", "whatYouLearn": ["Date: getFullYear, getMonth, getDate", "ключ даты YYYY-MM-DD", "расписание по дню недели", "сортировка задач по времени"], "steps": [{"type": "theory", "tag": "теория", "title": "Ключ даты", "html": "<p>Для хранения выбирают строку <strong>YYYY-MM-DD</strong>: она сортируется как текст и однозначна. Месяцы в JS считаются с нуля — октябрь это 9.</p>", "code": "function toKey(date) {\n  const y = date.getFullYear();\n  const m = String(date.getMonth() + 1).padStart(2, '0');\n  const d = String(date.getDate()).padStart(2, '0');\n  return `${y}-${m}-${d}`;\n}\n\nconsole.log(toKey(new Date()));", "tip": "Не используй toISOString для ключа дня: он переводит в UTC и может сдвинуть дату."}, {"type": "quiz", "tag": "проверка", "title": "Проверь себя", "questions": [{"text": "Почему нельзя хранить дату как «26.10»?", "options": ["непонятно, за какой год, и сортировка ломается", "слишком длинно", "в JS нет точек"], "answer": 0, "explain": "Без года запись бессмысленна через год. Сортировать такие строки тоже неудобно."}, {"text": "Задача «каждый вторник в 15:00» — где ей место?", "options": ["в расписании по дню недели", "в списке дел на конкретную дату", "в заметках"], "answer": 0, "explain": "Повторяющееся — по дню недели, разовое — по конкретной дате."}]}, {"type": "playground", "tag": "практика", "title": "Какой сегодня день?", "task": "Выведи в консоль название сегодняшнего дня недели из массива.", "start": "<script>\nconst days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];\nconst today = new Date();\n\n// console.log(...)\n<\/script>\n", "check": ["new date", "getday", "console.log"], "hint": "console.log(days[today.getDay()]); — getDay() возвращает 0 для воскресенья.", "success": "Даты больше не пугают. Теперь расписание можно строить по дням."}, {"type": "checklist", "tag": "практика", "title": "Проверь в проекте", "intro": "После того как сделаешь вкладку «Неделя».", "items": ["Расписание на понедельник не меняется от даты", "Внеплановая задача привязана к конкретному дню", "В архивном дне не видно задач другого дня"]}, {"type": "quiz", "boss": true, "tag": "финальный экзамен", "title": "Финальный экзамен", "questions": [{"text": "Что вернёт new Date(2026, 9, 26).getMonth()?", "options": ["9", "10", "26"], "answer": 0, "explain": "Месяцы с нуля: 9 — это октябрь. Не путай с номером месяца в календаре."}, {"text": "Как хранить внеплановые задачи?", "options": ["в объекте по ключу даты", "в одном массиве без дат", "в CSS"], "answer": 0, "explain": "Объект вида { '2026-10-26': [...] } — по ключу дня."}]}], "next": "lesson-07.html"});
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+/* base.css — переменные, сброс стилей, общий каркас экранов, шапка и XP-бар. */
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --accent: #6366f1;
+  --accent-soft: #eef2ff;
+  --danger: #ef4444;
+  --border: #e2e8f0;
+  --radius: 18px;
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --page-padding: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 76px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Экраны: один виден, остальные скрыты */
+.screen {
+  display: none;
+  /* одинаковые отступы со всех сторон, включая боковые вырезы телефонов */
+  padding: var(--page-padding);
+  padding-left: max(var(--page-padding), env(safe-area-inset-left));
+  padding-right: max(var(--page-padding), env(safe-area-inset-right));
+  max-width: 100%;
+}
+.screen.active { display: block; }
+
+.screen h1 { margin: 0 0 4px; font-size: 1.3rem; }
+
+/* Единый стиль для всех кнопок */
+button {
+  font-family: inherit;
+  touch-action: manipulation;
+  cursor: pointer;
+  min-height: 44px;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input, textarea, select { max-width: 100%; }
+
+.hidden { display: none !important; }
+
+/* Общие кнопки-действия */
+.primary-btn {
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  padding: 14px;
+  width: 100%;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.secondary-btn.inline {
+  width: auto;
+  margin-top: 0;
+  padding: 10px 14px;
+}
+
+/* ===== Шапка дашборда ===== */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.header-top h1 { margin: 0; font-size: 1.3rem; }
+
+/* Случайная подсказка-«сплэш» как на титульном экране Minecraft */
+.splash {
+  color: #b45309;
+  font-weight: 800;
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+  overflow-wrap: anywhere;
+  /* h1 пустой до подстановки: держим высоту, чтобы шапка не прыгала */
+  min-height: 1.6em;
+}
+
+.current-date {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.header-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.header-controls .date-picker {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  min-height: 40px;
+  min-width: 0;
+  color: var(--text);
+}
+
+#edit-mode-toggle {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+#edit-mode-toggle.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* ===== XP-бар ===== */
+.xp-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-width: 0;
+}
+.xp-track {
+  flex: 1;
+  min-width: 0;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+#xp-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+/* ===== Нижняя навигация ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+  z-index: 20;
+}
+
+.bottom-nav button {
+  flex: 1;
+  padding: 10px 2px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  min-height: 48px;
+}
+
+.bottom-nav button.active { color: var(--accent); font-weight: 600; }

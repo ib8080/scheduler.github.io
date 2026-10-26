@@ -1,0 +1,10 @@
+/* notes.css — блок «Заметки». */
+.notes-area {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  font: inherit;
+  resize: vertical;
+}

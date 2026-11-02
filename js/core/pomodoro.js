@@ -4,7 +4,7 @@
 (function (App) {
   'use strict';
 
-  const { POMODORO_DEFAULTS, POMODORO_MESSAGES } = App.config;
+  const { POMODORO_DEFAULTS, POMODORO_MESSAGES, POMODORO_SOUND_DEFAULT } = App.config;
 
   function clampMinutes(value, fallback) {
     const number = Math.round(Number(value));
@@ -17,7 +17,11 @@
       App.state.pomodoro = {
         tasks: [],
         activeTaskId: null,
-        settings: { work: POMODORO_DEFAULTS.work, break: POMODORO_DEFAULTS.break },
+        settings: {
+          work: POMODORO_DEFAULTS.work,
+          break: POMODORO_DEFAULTS.break,
+          sound: POMODORO_SOUND_DEFAULT
+        },
         phase: 'work',
         endAt: null,
         remaining: POMODORO_DEFAULTS.work * 60,
@@ -88,10 +92,13 @@
     else start();
   }
 
+  // Сброс всегда возвращает таймер к работе над задачей, даже если он стоял
+  // на перерыве: после сброса снова 25 минут задачи, а не отдых.
   function reset() {
     const p = state();
     p.endAt = null;
-    p.remaining = phaseSeconds(p.phase);
+    p.phase = 'work';
+    p.remaining = phaseSeconds('work');
     setMessage('stop');
     App.save();
   }
@@ -102,6 +109,13 @@
     p.settings.break = clampMinutes(breakMinutes, p.settings.break);
     // запущенный таймер не сбиваем: он досчитает по старой длительности
     if (!p.endAt) p.remaining = phaseSeconds(p.phase);
+    App.save();
+  }
+
+  // Звук конца таймера выбирается в редактировании блока «Помодоро»
+  function setSound(value) {
+    const p = state();
+    p.settings.sound = App.config.isPomodoroSound(value) ? value : POMODORO_SOUND_DEFAULT;
     App.save();
   }
 
@@ -118,6 +132,14 @@
     p.remaining = phaseSeconds(p.phase);
     setMessage(finishedPhase === 'work' ? 'workDone' : 'breakDone');
     App.save();
+
+    // Будильник и оверлей: звук берём из настроек, показываем поверх любого экрана
+    if (App.ui && App.ui.timerAlert) {
+      App.ui.timerAlert.show({
+        finished: finishedPhase,
+        sound: p.settings.sound || POMODORO_SOUND_DEFAULT
+      });
+    }
     return true;
   }
 
@@ -224,6 +246,7 @@
     toggle,
     reset,
     setSettings,
+    setSound,
     tick,
     taskXP,
     tasks,

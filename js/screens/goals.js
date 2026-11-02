@@ -4,7 +4,7 @@
   'use strict';
 
   const { GOAL_SMART_FIELDS, PRIORITY_TITLES } = App.config;
-  const { escapeHtml, formatDateShort, getTodayKey } = App.utils;
+  const { escapeHtml, formatDateShort, getTodayKey, dueInfo } = App.utils;
   const { createPriorityPicker } = App.ui.taskControls;
 
   let showDone = false;
@@ -22,7 +22,7 @@
     if (!form) return;
 
     form.innerHTML = `
-      <h2 class="goals-heading">Новая цель</h2>
+      <h3 class="goals-heading">Новая цель</h3>
       <label class="goal-label" for="goal-title">Цель</label>
       <input id="goal-title" class="goal-input" type="text" placeholder="Например: сдать экзамен по физике на «5»">
       ${GOAL_SMART_FIELDS.map(field => `
@@ -86,12 +86,17 @@
     card.type = 'button';
     card.className = 'goal-card' + (goal.done ? ' done' : '');
     card.dataset.goalId = goal.id;
+    const due = goal.done ? null : dueInfo(goal.dueDate);
+    const dueText = goal.done
+      ? (formatDateShort(goal.dueDate) || 'без даты')
+      : (due ? `${formatDateShort(goal.dueDate)} · ${due.text}` : 'без даты');
+    const dueClass = due && due.overdue ? ' goal-due-overdue' : '';
     card.innerHTML = `
       <span class="goal-card-main">
         <span class="goal-card-title">${escapeHtml(goal.title)}</span>
         <span class="goal-card-meta">
           <span class="priority-dot priority-${goal.priority}"></span>
-          ${formatDateShort(goal.dueDate) || 'без даты'}
+          <span class="goal-due${dueClass}">${dueText}</span>
           · ${PRIORITY_TITLES[goal.priority] || 'Средний'}
           ${goal.done ? ` · выполнено ${formatDateShort(goal.doneDate)}` : ''}
         </span>
@@ -114,7 +119,7 @@
     if (!goals.length) {
       const empty = document.createElement('p');
       empty.className = 'empty-hint';
-      empty.textContent = 'Активных целей нет. Сформулируй первую выше — и поставь срок.';
+      empty.textContent = 'Активных целей нет. Сформулируй первую ниже — и поставь срок.';
       list.appendChild(empty);
       return;
     }
@@ -150,6 +155,12 @@
     const goal = App.goals.byId(goalId);
     if (!goal) return;
 
+    const due = goal.done ? null : dueInfo(goal.dueDate);
+    const dueText = goal.done
+      ? (formatDateShort(goal.dueDate) || 'без даты')
+      : (due ? `${formatDateShort(goal.dueDate)} · ${due.text}` : 'без даты');
+    const dueClass = due && due.overdue ? ' goal-due-overdue' : '';
+
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.innerHTML = `
@@ -157,7 +168,7 @@
         <h2>${escapeHtml(goal.title)}</h2>
         <p class="goal-card-meta">
           <span class="priority-dot priority-${goal.priority}"></span>
-          ${formatDateShort(goal.dueDate) || 'без даты'}
+          <span class="goal-due${dueClass}">${dueText}</span>
           · ${PRIORITY_TITLES[goal.priority] || 'Средний'}
           · +${App.goals.goalXP(goal)} XP
         </p>

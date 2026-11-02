@@ -43,6 +43,112 @@
 
     container.appendChild(settings);
 
+    // В редактировании у блока появляется выбор звука конца таймера
+    if (App.state.editingMode) {
+      const sounds = App.config.POMODORO_SOUNDS;
+      const prefix = App.config.CUSTOM_SOUND_PREFIX;
+      const current = App.pomodoro.state().settings.sound || App.config.POMODORO_SOUND_DEFAULT;
+      const currentIsCustom = current.indexOf(prefix) === 0;
+
+      const soundRow = document.createElement('div');
+      soundRow.className = 'pomodoro-sound-row';
+      soundRow.innerHTML = `
+        <label class="pomodoro-setting">
+          <span>Звук конца таймера</span>
+          <select class="pomodoro-sound">
+            ${sounds.map(item => `<option value="${item.value}"${item.value === current ? ' selected' : ''}>${escapeHtml(item.label)}</option>`).join('')}
+            <optgroup label="Свои звуки" class="pomodoro-sounds-custom">
+              ${currentIsCustom ? `<option value="${escapeHtml(current)}" selected>Свой звук…</option>` : ''}
+            </optgroup>
+          </select>
+        </label>
+        <button type="button" class="pomodoro-sound-test secondary-btn inline">Проверить</button>
+      `;
+
+      const select = soundRow.querySelector('.pomodoro-sound');
+      const customGroup = soundRow.querySelector('.pomodoro-sounds-custom');
+
+      const extraRow = document.createElement('div');
+      extraRow.className = 'pomodoro-sound-extra';
+      extraRow.innerHTML = `
+        <label class="pomodoro-sound-add secondary-btn inline">
+          ＋ Свой звук
+          <input type="file" class="pomodoro-sound-file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac" hidden>
+        </label>
+      `;
+      const soundHint = document.createElement('p');
+      soundHint.className = 'pomodoro-sound-hint';
+      soundHint.textContent = 'mp3, wav или ogg до 5 МБ — файл хранится в браузере.';
+
+      function selectCurrent() {
+        const wanted = App.pomodoro.state().settings.sound || App.config.POMODORO_SOUND_DEFAULT;
+        if ([...select.options].some(option => option.value === wanted)) {
+          select.value = wanted;
+          return;
+        }
+        // файл удалили — возвращаемся к звуку по умолчанию («Марш Тореадора»)
+        App.pomodoro.setSound(App.config.POMODORO_SOUND_DEFAULT);
+        select.value = App.config.POMODORO_SOUND_DEFAULT;
+      }
+
+      function renderCustomSounds(items) {
+        customGroup.innerHTML = '';
+        items.forEach(item => {
+          const option = document.createElement('option');
+          option.value = prefix + item.id;
+          option.textContent = item.name;
+          customGroup.appendChild(option);
+        });
+        if (!items.length && customGroup.isConnected) {
+          customGroup.remove();
+        } else if (items.length && !customGroup.isConnected) {
+          select.appendChild(customGroup);
+        }
+        selectCurrent();
+      }
+
+      if (App.sounds) {
+        App.sounds.list().then((items) => {
+          if (!container.isConnected) return;
+          renderCustomSounds(items);
+        });
+      }
+
+      select.addEventListener('change', () => {
+        App.pomodoro.setSound(select.value);
+        if (App.sound) App.sound.play(select.value);
+      });
+      soundRow.querySelector('.pomodoro-sound-test').addEventListener('click', () => {
+        if (App.sound) App.sound.play(select.value);
+      });
+
+      // Быстрое добавление своего файла прямо из блока
+      const fileInput = extraRow.querySelector('.pomodoro-sound-file');
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files && fileInput.files[0];
+        if (!file || !App.sounds) return;
+        App.sounds.addFile(file)
+          .then((item) => {
+            App.pomodoro.setSound(prefix + item.id);
+            return App.sounds.list().then((items) => ({ item, items }));
+          })
+          .then(({ item, items }) => {
+            if (!container.isConnected) return;
+            renderCustomSounds(items);
+            select.value = prefix + item.id;
+            if (App.sound) App.sound.play(prefix + item.id);
+            soundHint.textContent = `Звук «${item.name}» добавлен и выбран.`;
+          })
+          .catch((error) => {
+            soundHint.textContent = (error && error.message) || 'Не удалось добавить звук.';
+          });
+      });
+
+      container.appendChild(soundRow);
+      container.appendChild(extraRow);
+      container.appendChild(soundHint);
+    }
+
     const tasksWrap = document.createElement('div');
     tasksWrap.className = 'pomodoro-tasks';
     container.appendChild(tasksWrap);

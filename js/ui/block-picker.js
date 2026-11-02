@@ -26,7 +26,8 @@
           id,
           type: blockType.type,
           title: blockType.label,
-          data: blockType.defaultData()
+          data: blockType.defaultData(),
+          settings: typeof blockType.defaultSettings === 'function' ? blockType.defaultSettings() : {}
         });
         App.state.order.push(id);
         App.save();

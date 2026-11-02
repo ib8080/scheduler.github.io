@@ -90,7 +90,7 @@
   min-height: 44px;
   padding: 4px 8px;
   border-radius: 8px;
-  background: #f8fafc;
+  background: var(--surface-soft);
 }
 
 .pomodoro-task-row.active { background: var(--accent-soft); }
@@ -118,3 +118,63 @@
   font-weight: 400;
 }
 .pomodoro-task-row .pomodoro-task-text:disabled { cursor: default; }
+
+/* Выбор звука конца таймера — только в редактировании блока */
+.pomodoro-sound-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+
+.pomodoro-sound-row .pomodoro-setting { flex: 1; }
+
+.pomodoro-sound {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px;
+  font: inherit;
+  font-size: 0.85rem;
+  background: var(--card);
+  color: var(--text);
+}
+
+.pomodoro-sound-test {
+  flex-shrink: 0;
+  width: auto;
+  margin-top: 0;
+  padding: 10px 12px;
+}
+
+.pomodoro-sound-hint {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.pomodoro-sound-extra {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pomodoro-sound-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin: 0;
+  padding: 8px 12px;
+  min-height: 36px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}

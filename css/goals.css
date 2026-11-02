@@ -4,11 +4,17 @@
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 16px;
-  margin: 20px 0 12px;
+  margin: 0 0 12px;
   min-width: 0;
 }
 
 .goals-heading { font-size: 1rem; margin: 0 0 12px; }
+
+/* «Цели по SMART» — второй уровень, стоит прямо перед формой */
+.goals-section-title {
+  font-size: 1.05rem;
+  margin: 24px 0 10px;
+}
 
 .goal-label {
   display: block;
@@ -139,6 +145,10 @@
 
 .goal-smart-count { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
 
+/* Просроченный срок цели — красным, чтобы бросался в глаза */
+.goal-due-overdue,
+.goals-block-due.overdue { color: var(--danger); font-weight: 600; }
+
 .goal-card.done .goal-card-title { text-decoration: line-through; opacity: 0.6; }
 
 /* ===== Описание цели по SMART (модалка) ===== */
@@ -196,7 +206,7 @@
   text-align: left;
   font: inherit;
   color: var(--text);
-  background: #f8fafc;
+  background: var(--surface-soft);
   border-radius: 8px;
   padding: 10px;
   min-height: 44px;

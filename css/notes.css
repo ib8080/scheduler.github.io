@@ -8,3 +8,71 @@
   font: inherit;
   resize: vertical;
 }
+
+.notes-area {
+  background: var(--card);
+  color: var(--text);
+}
+
+/* Тумблер «показывать заметки прошлого дня» — только в редактировании */
+.notes-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.notes-toggle input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Вчерашние заметки: только показ, без копирования в сегодняшние */
+.notes-yesterday {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+
+.notes-yesterday-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.notes-yesterday-text {
+  margin: 6px 0 0;
+  font-size: 0.86rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.notes-yesterday-text.empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Пометка, что блок переключён в общие (не дневные) заметки */
+.notes-mode-hint {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

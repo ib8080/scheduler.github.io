@@ -41,7 +41,7 @@
   margin: 6px 0 12px;
 }
 
-.review-status.warn { color: #b45309; font-weight: 600; }
+.review-status.warn { color: var(--splash); font-weight: 600; }
 
 .review-form textarea {
   width: 100%;
@@ -52,6 +52,8 @@
   font: inherit;
   resize: vertical;
   margin-bottom: 12px;
+  background: var(--card);
+  color: var(--text);
 }
 
 #save-review {

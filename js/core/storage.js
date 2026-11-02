@@ -61,6 +61,19 @@
       }));
   }
 
+  function normalizeTheme(source) {
+    const src = source && typeof source === 'object' ? source : {};
+    const customCSS = String(src.customCSS || '');
+    let mode = App.config.THEME_MODES.includes(src.mode) ? src.mode : 'light';
+    // «своя тема» без CSS — это просто светлая
+    if (mode === 'custom' && !customCSS.trim()) mode = 'light';
+    return {
+      mode,
+      customName: String(src.customName || '').slice(0, 40),
+      customCSS
+    };
+  }
+
   function normalizePomodoro(source) {
     const defaults = App.config.POMODORO_DEFAULTS;
     const src = source && typeof source === 'object' ? source : {};
@@ -73,6 +86,11 @@
     const work = clampMinutes(rawSettings.work, defaults.work);
     const breakMinutes = clampMinutes(rawSettings.break, defaults.break);
     const phase = src.phase === 'break' ? 'break' : 'work';
+
+    // допустимы и встроенные звуки, и свои файлы (custom:<id>)
+    const sound = App.config.isPomodoroSound(rawSettings.sound)
+      ? rawSettings.sound
+      : App.config.POMODORO_SOUND_DEFAULT;
 
     const tasks = Array.isArray(src.tasks)
       ? src.tasks
@@ -99,7 +117,7 @@
     return {
       tasks,
       activeTaskId,
-      settings: { work, break: breakMinutes },
+      settings: { work, break: breakMinutes, sound },
       phase,
       endAt,
       remaining,
@@ -133,9 +151,11 @@
     merged.monthReviews = merged.monthReviews.filter(r => r && /^\d{4}-\d{2}$/.test(String(r.monthKey || '')));
 
     merged.weekSchedule = { ...defaults.weekSchedule, ...(loaded.weekSchedule || {}) };
-    merged.dayNotes = loaded.dayNotes || {};
+    merged.dayNotes = loaded.dayNotes && typeof loaded.dayNotes === 'object' ? loaded.dayNotes : {};
+    merged.permanentNotes = typeof loaded.permanentNotes === 'string' ? loaded.permanentNotes : '';
     merged.dailyTasks = normalizeDailyTasks(loaded.dailyTasks);
     merged.stepsProgress = loaded.stepsProgress || {};
+    merged.theme = normalizeTheme(loaded.theme);
     if (!merged.selectedDate) merged.selectedDate = null;
     if (typeof merged.editingMode !== 'boolean') merged.editingMode = false;
     if (!Array.isArray(merged.blocks)) merged.blocks = defaults.blocks;
@@ -183,6 +203,15 @@
     }
     merged.flags.pomodoroBlockAdded = true;
     merged.flags.goalsBlockAdded = true;
+
+    // настройки есть у каждого блока, включая добавленные миграцией
+    merged.blocks.forEach(block => {
+      if (!block.settings || typeof block.settings !== 'object') block.settings = {};
+      if (block.type === 'notes') {
+        if (typeof block.settings.showYesterday !== 'boolean') block.settings.showYesterday = false;
+        if (typeof block.settings.permanent !== 'boolean') block.settings.permanent = false;
+      }
+    });
 
     // каждый блок должен быть в порядке отрисовки
     merged.blocks.forEach(block => {

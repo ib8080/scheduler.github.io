@@ -15,7 +15,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border);
   min-height: 44px;
   min-width: 0;
 }
@@ -50,7 +50,7 @@
 
 /* Иконковые кнопки (удаление / смена приоритета) */
 .icon-btn {
-  color: #cbd5e1;
+  color: var(--muted);
   font-size: 0.9rem;
   padding: 6px 8px;
   border-radius: 8px;
@@ -58,7 +58,7 @@
   flex-shrink: 0;
   background: none;
 }
-.icon-btn:hover { background: #f1f5f9; color: var(--danger); }
+.icon-btn:hover { background: var(--surface-soft); color: var(--danger); }
 .icon-btn.danger { color: var(--danger); }
 .priority-cycle { font-size: 1rem; }
 .priority-cycle:hover { color: var(--muted); }
@@ -130,7 +130,7 @@
 }
 
 /* Активный кружок не увеличивается — иначе он вылезает за отступ и затирает соседей */
-.priority-btn.active { border-color: currentColor; background: rgba(15, 23, 42, 0.04); }
+.priority-btn.active { border-color: currentColor; background: var(--surface-soft); }
 .priority-btn.high { color: #ef4444; }
 .priority-btn.medium { color: #f59e0b; }
 .priority-btn.low { color: #10b981; }

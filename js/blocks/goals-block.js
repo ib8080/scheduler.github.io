@@ -4,7 +4,7 @@
 (function (App) {
   'use strict';
 
-  const { escapeHtml, formatDateShort } = App.utils;
+  const { escapeHtml, formatDateShort, dueInfo } = App.utils;
 
   function renderGoalsBlock(container, block) {
     if (!block.data || typeof block.data !== 'object' || !Array.isArray(block.data.ids)) {
@@ -31,10 +31,15 @@
       row.type = 'button';
       row.className = 'goals-block-item';
       row.title = 'Открыть цель на вкладке «Цели»';
+      const due = dueInfo(goal.dueDate);
+      const dueText = due ? due.short : 'без даты';
+      const dueTitle = due
+        ? `Срок: ${formatDateShort(goal.dueDate)} · ${due.text}`
+        : (goal.dueDate ? `Срок: ${formatDateShort(goal.dueDate)}` : 'Без срока');
       row.innerHTML = `
         <span class="priority-dot priority-${goal.priority}"></span>
         <span class="goals-block-title">${escapeHtml(goal.title)}</span>
-        <span class="goals-block-due">${formatDateShort(goal.dueDate) || 'без даты'}</span>
+        <span class="goals-block-due${due && due.overdue ? ' overdue' : ''}" title="${escapeHtml(dueTitle)}">${dueText}</span>
         <span class="xp-chip">+${App.goals.goalXP(goal)}</span>
       `;
       row.addEventListener('click', () => {

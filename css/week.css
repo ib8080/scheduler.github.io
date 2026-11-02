@@ -40,7 +40,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 0;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border);
   min-width: 0;
 }
 
@@ -53,6 +53,7 @@
   padding: 6px;
   font: inherit;
   font-size: 0.85rem;
+  background: var(--card);
 }
 
 .schedule-item .week-subject {
@@ -63,6 +64,7 @@
   padding: 6px;
   font: inherit;
   font-size: 0.9rem;
+  background: var(--card);
 }
 
 .add-schedule-btn {
@@ -85,4 +87,6 @@
   padding: 12px;
   font: inherit;
   resize: vertical;
+  background: var(--card);
+  color: var(--text);
 }

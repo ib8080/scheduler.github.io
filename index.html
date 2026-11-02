@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta name="description" content="Школьный ежедневник: дела, расписание, цели, заметки, помодоро и обучение. Работает офлайн.">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Ежедневник">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Мой ежедневник</title>
 
   <!-- Стили: по файлу на компонент/экран -->
@@ -19,6 +28,32 @@
   <link rel="stylesheet" href="css/learn.css">
   <link rel="stylesheet" href="css/review.css">
   <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/timer-alert.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <script>
+    /* Тема применяется до первой отрисовки, чтобы не мигало светлым.
+       Ключ совпадает с App.config.STORAGE_KEY (school_planner_v3). */
+    (function () {
+      try {
+        var saved = JSON.parse(localStorage.getItem('school_planner_v3') || 'null');
+        var theme = saved && saved.theme;
+        if (!theme) return;
+        var mode = theme.mode;
+        if (mode !== 'dark' && mode !== 'custom') return;
+        var customCSS = String(theme.customCSS || '');
+        if (mode === 'custom' && !customCSS.trim()) return;
+        document.documentElement.dataset.theme = mode;
+        document.documentElement.style.colorScheme = mode === 'dark' ? 'dark' : 'light';
+        if (mode === 'custom') {
+          var style = document.createElement('style');
+          style.id = 'custom-theme-style';
+          style.textContent = customCSS;
+          document.head.appendChild(style);
+        }
+      } catch (e) { /* первый запуск или испорченные данные */ }
+    })();
+  </script>
 </head>
 <body>
   <main id="app">
@@ -30,7 +65,7 @@
           <h1 id="app-greeting" class="splash"></h1>
           <div class="header-controls">
             <input type="date" id="date-picker" class="date-picker" title="Выбрать день для просмотра архива">
-            <button id="edit-mode-toggle">Редактировать</button>
+            <button id="settings-btn" type="button" aria-label="Настройки" title="Настройки">⚙</button>
           </div>
         </div>
         <p id="current-date" class="current-date"></p>
@@ -66,15 +101,17 @@
 
     <!-- ЭКРАН 4: ЦЕЛИ -->
     <section id="screen-goals" class="screen">
-      <h1>Цели по SMART</h1>
-      <p class="subtitle">Цель, у которой есть конкретика, измеримость и срок, выполняется в разы чаще.</p>
+      <h1>Мои цели</h1>
+      <p class="subtitle">Здесь твои цели и сроки. Сформулируй ниже новую цель по SMART — с конкретикой, измеримостью и датой.</p>
+
       <div class="goals-head">
-        <h2 class="goals-heading">Мои цели</h2>
+        <h2 class="goals-heading">Активные цели</h2>
         <button id="toggle-done-goals" class="secondary-btn inline">Выполненные (0)</button>
       </div>
       <div id="goals-list" class="goals-list"></div>
       <div id="goals-done" class="goals-list hidden"></div>
 
+      <h2 class="goals-section-title">Цели по SMART</h2>
       <div id="goal-form" class="goal-form"></div>
     </section>
 
@@ -109,13 +146,20 @@
   <script src="js/core/utils.js"></script>
   <script src="js/core/storage.js"></script>
   <script src="js/core/state.js"></script>
+  <script src="js/ui/theme.js"></script>
   <script src="js/core/gamification.js"></script>
   <script src="js/core/goals.js"></script>
   <script src="js/core/pomodoro.js"></script>
+  <script src="js/core/sounds.js"></script>
+  <script src="js/core/sound.js"></script>
+  <script src="js/core/pwa.js"></script>
   <script src="js/ui/task-controls.js"></script>
   <script src="js/ui/header.js"></script>
   <script src="js/ui/navigation.js"></script>
   <script src="js/ui/block-picker.js"></script>
+  <script src="js/ui/timer-alert.js"></script>
+  <script src="js/ui/settings.js"></script>
+  <script src="js/ui/overlay-guard.js"></script>
   <script src="js/ui/goal-picker.js"></script>
   <script src="js/blocks/todo-block.js"></script>
   <script src="js/blocks/matrix-block.js"></script>

@@ -1,0 +1,43 @@
+/* themes.css — тёмная тема. Светлая — это значения по умолчанию из base.css.
+   Своя тема подключается отдельным <style> и обычно переопределяет эти же переменные. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0b1120;
+  --card: #151f33;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #818cf8;
+  --accent-soft: #2a2f5c;
+  --danger: #f87171;
+  --border: #2b3a54;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+  --surface-soft: #1b2740;
+  --track: #2b3a54;
+  --splash: #fbbf24;
+  --overlay: rgba(2, 6, 23, 0.72);
+  --quad-border: rgba(255, 255, 255, 0.08);
+  --quad-q1: #3b1d24;
+  --quad-q2: #3a2f14;
+  --quad-q3: #16243f;
+  --quad-q4: #1b2740;
+}
+
+/* Цвета, которые заданы не через переменные, а точечно */
+html[data-theme="dark"] .pomodoro-message.workDone,
+html[data-theme="dark"] .pomodoro-message.breakDone { color: #4ade80; }
+
+html[data-theme="dark"] .step-status { color: #fbbf24; }
+html[data-theme="dark"] .step-status.done { color: #4ade80; }
+html[data-theme="dark"] .lesson-toggle.done { background: #14351f; color: #4ade80; }
+
+html[data-theme="dark"] .learn-progress-fill {
+  background: linear-gradient(90deg, #818cf8, #c084fc);
+}
+
+html[data-theme="dark"] .theme-option.active { color: #0b1120; }
+
+html[data-theme="dark"] .modal-content {
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}

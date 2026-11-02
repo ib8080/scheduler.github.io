@@ -25,8 +25,8 @@
   min-width: 0;
 }
 
-.day-schedule-item.planned { background: #f8fafc; }
-.day-schedule-item.extra { background: #f0f9ff; }
+.day-schedule-item.planned { background: var(--surface-soft); }
+.day-schedule-item.extra { background: var(--accent-soft); }
 
 /* Внеплановая задача: текст занимает всю строку, кнопки уходят вниз,
    если места не хватает (узкий телефон). */
@@ -66,6 +66,7 @@
   font-size: 0.85rem;
   color: var(--accent);
   font-weight: 600;
+  background: var(--card);
 }
 
 .day-schedule-item .item-subject {

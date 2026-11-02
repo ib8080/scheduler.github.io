@@ -7,13 +7,17 @@
     App.ui.navigation.init();
     App.ui.blockPicker.init();
 
-    // Переключатель режима редактирования
-    const editToggle = document.getElementById('edit-mode-toggle');
-    if (editToggle) {
-      editToggle.addEventListener('click', () => {
-        App.state.editingMode = !App.state.editingMode;
-        App.save();
-        App.screens.dashboard.render();
+    // Кнопка в шапке: настройки, а в режиме редактирования — «Готово»
+    const settingsBtn = document.getElementById('settings-btn');
+    if (settingsBtn) {
+      settingsBtn.addEventListener('click', () => {
+        if (App.state.editingMode) {
+          App.state.editingMode = false;
+          App.save();
+          App.screens.dashboard.render();
+          return;
+        }
+        App.ui.settings.open();
       });
     }
 
@@ -24,6 +28,9 @@
     App.screens.goals.init();
     App.screens.goals.render();
     App.screens.review.render();
+
+    // Установка на телефон и офлайн-режим (нужен https:// или localhost)
+    if (App.pwa) App.pwa.register();
   }
 
   window.addEventListener('error', (e) => {

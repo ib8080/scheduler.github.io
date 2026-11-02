@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS-классы и переменные — Мой ежедневник</title>
+<style>
+  :root {
+    --bg: #f5f7fb; --card: #ffffff; --text: #1e293b; --muted: #64748b;
+    --accent: #6366f1; --accent-soft: #eef2ff; --border: #e2e8f0; --danger: #ef4444;
+    --radius: 18px; --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 18px 16px 40px; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 1.35rem; margin: 0 0 6px; }
+  h2 { font-size: 1rem; margin: 22px 0 10px; }
+  .sub { color: var(--muted); font-weight: 400; font-size: 0.82rem; }
+  p { margin: 8px 0; }
+  a { color: var(--accent); }
+  .back { display: inline-block; margin-bottom: 12px; font-size: 0.9rem; }
+  .search {
+    width: 100%; min-height: 44px; margin: 12px 0; padding: 10px 12px;
+    border: 1px solid var(--border); border-radius: 12px; font: inherit;
+    background: var(--card); color: var(--text);
+  }
+  .card {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 16px; margin: 12px 0; overflow-x: auto;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    background: var(--accent-soft); color: var(--accent); border-radius: 8px;
+    padding: 4px 8px; font-size: 0.78rem; white-space: nowrap;
+  }
+  .empty-hint { color: var(--muted); font-size: 0.85rem; }
+  .hidden { display: none !important; }
+  pre {
+    background: var(--accent-soft); color: var(--text); border-radius: 12px;
+    padding: 12px; overflow-x: auto; font-size: 0.8rem;
+  }
+  .note { color: var(--muted); font-size: 0.82rem; }
+</style>
+<link rel="stylesheet" href="css/themes.css">
+<script src="lessons/lesson-theme.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Вернуться в ежедневник</a>
+  <h1>CSS-классы и переменные</h1>
+  <p class="note">Эта страница — шпаргалка для своей темы. Проще всего менять переменные в блоке <code>:root { … }</code>: они влияют на всё приложение сразу. Классы пригодятся, если нужно поправить отдельный блок.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Переменные темы</h2>
+    <p class="note">Светлые значения — по умолчанию, тёмные — из <code>css/themes.css</code>. Своя тема может переопределить любую переменную.</p>
+    <table>
+      <thead><tr><th>Переменная</th><th>За что отвечает</th><th>Светлая</th><th>Тёмная</th></tr></thead>
+      <tbody>
+<tr data-search="accent Акцент (кнопки, ссылки, активные элементы)">
+    <td><code>--accent</code></td>
+    <td>Акцент (кнопки, ссылки, активные элементы)</td>
+    <td><code>#6366f1</code></td>
+    <td><code>#818cf8</code></td>
+  </tr>
+<tr data-search="accent-soft Мягкий акцент (фоновые плашки)">
+    <td><code>--accent-soft</code></td>
+    <td>Мягкий акцент (фоновые плашки)</td>
+    <td><code>#eef2ff</code></td>
+    <td><code>#2a2f5c</code></td>
+  </tr>
+<tr data-search="bg Фон страницы">
+    <td><code>--bg</code></td>
+    <td>Фон страницы</td>
+    <td><code>#f5f7fb</code></td>
+    <td><code>#0b1120</code></td>
+  </tr>
+<tr data-search="border Границы и разделители">
+    <td><code>--border</code></td>
+    <td>Границы и разделители</td>
+    <td><code>#e2e8f0</code></td>
+    <td><code>#2b3a54</code></td>
+  </tr>
+<tr data-search="card Фон карточек и полей">
+    <td><code>--card</code></td>
+    <td>Фон карточек и полей</td>
+    <td><code>#ffffff</code></td>
+    <td><code>#151f33</code></td>
+  </tr>
+<tr data-search="danger Опасность и просроченные сроки">
+    <td><code>--danger</code></td>
+    <td>Опасность и просроченные сроки</td>
+    <td><code>#ef4444</code></td>
+    <td><code>#f87171</code></td>
+  </tr>
+<tr data-search="muted Второстепенный текст">
+    <td><code>--muted</code></td>
+    <td>Второстепенный текст</td>
+    <td><code>#64748b</code></td>
+    <td><code>#94a3b8</code></td>
+  </tr>
+<tr data-search="overlay Затемнение под модалками">
+    <td><code>--overlay</code></td>
+    <td>Затемнение под модалками</td>
+    <td><code>rgba(15, 23, 42, 0.45)</code></td>
+    <td><code>rgba(2, 6, 23, 0.72)</code></td>
+  </tr>
+<tr data-search="page-padding Отступ по краям экрана">
+    <td><code>--page-padding</code></td>
+    <td>Отступ по краям экрана</td>
+    <td><code>16px</code></td>
+    <td><code>—</code></td>
+  </tr>
+<tr data-search="quad-border Граница квадрантов матрицы">
+    <td><code>--quad-border</code></td>
+    <td>Граница квадрантов матрицы</td>
+    <td><code>rgba(15, 23, 42, 0.06)</code></td>
+    <td><code>rgba(255, 255, 255, 0.08)</code></td>
+  </tr>
+<tr data-search="quad-q1 Квадрант 1 (срочно и важно)">
+    <td><code>--quad-q1</code></td>
+    <td>Квадрант 1 (срочно и важно)</td>
+    <td><code>#fef2f2</code></td>
+    <td><code>#3b1d24</code></td>
+  </tr>
+<tr data-search="quad-q2 Квадрант 2 (важно, не срочно)">
+    <td><code>--quad-q2</code></td>
+    <td>Квадрант 2 (важно, не срочно)</td>
+    <td><code>#fffbeb</code></td>
+    <td><code>#3a2f14</code></td>
+  </tr>
+<tr data-search="quad-q3 Квадрант 3 (срочно, не важно)">
+    <td><code>--quad-q3</code></td>
+    <td>Квадрант 3 (срочно, не важно)</td>
+    <td><code>#eff6ff</code></td>
+    <td><code>#16243f</code></td>
+  </tr>
+<tr data-search="quad-q4 Квадрант 4 (не срочно, не важно)">
+    <td><code>--quad-q4</code></td>
+    <td>Квадрант 4 (не срочно, не важно)</td>
+    <td><code>#f8fafc</code></td>
+    <td><code>#1b2740</code></td>
+  </tr>
+<tr data-search="radius Радиус скругления карточек">
+    <td><code>--radius</code></td>
+    <td>Радиус скругления карточек</td>
+    <td><code>18px</code></td>
+    <td><code>—</code></td>
+  </tr>
+<tr data-search="shadow Тень карточек">
+    <td><code>--shadow</code></td>
+    <td>Тень карточек</td>
+    <td><code>0 8px 24px rgba(15, 23, 42, 0.06)</code></td>
+    <td><code>0 8px 24px rgba(0, 0, 0, 0.45)</code></td>
+  </tr>
+<tr data-search="splash Цвет подсказки-сплэша">
+    <td><code>--splash</code></td>
+    <td>Цвет подсказки-сплэша</td>
+    <td><code>#b45309</code></td>
+    <td><code>#fbbf24</code></td>
+  </tr>
+<tr data-search="surface-soft Мягкая поверхность (строки, подложки)">
+    <td><code>--surface-soft</code></td>
+    <td>Мягкая поверхность (строки, подложки)</td>
+    <td><code>#f8fafc</code></td>
+    <td><code>#1b2740</code></td>
+  </tr>
+<tr data-search="text Основной текст">
+    <td><code>--text</code></td>
+    <td>Основной текст</td>
+    <td><code>#1e293b</code></td>
+    <td><code>#e2e8f0</code></td>
+  </tr>
+<tr data-search="track Дорожка прогресса">
+    <td><code>--track</code></td>
+    <td>Дорожка прогресса</td>
+    <td><code>#e2e8f0</code></td>
+    <td><code>#2b3a54</code></td>
+  </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Пример своей темы</h2>
+    <pre>:root {
+  --bg: #0b1020;
+  --card: #151f33;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #818cf8;
+  --accent-soft: #2a2f5c;
+  --danger: #f87171;
+  --border: #2b3a54;
+  --surface-soft: #1b2740;
+  --track: #2b3a54;
+}</pre>
+    <p class="note">Вставь этот код в «Своя тема из CSS» → «Применить и сохранить».</p>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Классы по файлам</h2>
+    <input type="search" id="search" class="search" placeholder="Поиск по классам и переменным…" autocomplete="off">
+    <p class="empty-hint hidden" id="empty">Ничего не найдено.</p>
+    <div id="groups">
+<section class="group">
+    <h2>base.css <span class="sub">Каркас, переменные, шапка, навигация</span></h2>
+    <div class="chips"><code class="chip" data-search="active">active</code><code class="chip" data-search="bottom-nav">bottom-nav</code><code class="chip" data-search="css">css</code><code class="chip" data-search="current-date">current-date</code><code class="chip" data-search="date-picker">date-picker</code><code class="chip" data-search="header-controls">header-controls</code><code class="chip" data-search="header-top">header-top</code><code class="chip" data-search="hidden">hidden</code><code class="chip" data-search="inline">inline</code><code class="chip" data-search="overlay-open">overlay-open</code><code class="chip" data-search="primary-btn">primary-btn</code><code class="chip" data-search="screen">screen</code><code class="chip" data-search="secondary-btn">secondary-btn</code><code class="chip" data-search="splash">splash</code><code class="chip" data-search="xp-bar">xp-bar</code><code class="chip" data-search="xp-track">xp-track</code></div>
+  </section>
+<section class="group">
+    <h2>dashboard.css <span class="sub">Дашборд и карточки блоков</span></h2>
+    <div class="chips"><code class="chip" data-search="card-body">card-body</code><code class="chip" data-search="card-header">card-header</code><code class="chip" data-search="card-tools">card-tools</code><code class="chip" data-search="css">css</code><code class="chip" data-search="dashboard-card">dashboard-card</code><code class="chip" data-search="dashboard-grid">dashboard-grid</code><code class="chip" data-search="dragging">dragging</code><code class="chip" data-search="edit-mode">edit-mode</code><code class="chip" data-search="fab">fab</code><code class="chip" data-search="handle">handle</code><code class="chip" data-search="tool-btn">tool-btn</code></div>
+  </section>
+<section class="group">
+    <h2>tasks.css <span class="sub">Задачи, приоритеты, XP</span></h2>
+    <div class="chips"><code class="chip" data-search="active">active</code><code class="chip" data-search="add-btn">add-btn</code><code class="chip" data-search="css">css</code><code class="chip" data-search="danger">danger</code><code class="chip" data-search="done">done</code><code class="chip" data-search="high">high</code><code class="chip" data-search="icon-btn">icon-btn</code><code class="chip" data-search="low">low</code><code class="chip" data-search="medium">medium</code><code class="chip" data-search="priority-btn">priority-btn</code><code class="chip" data-search="priority-buttons">priority-buttons</code><code class="chip" data-search="priority-cycle">priority-cycle</code><code class="chip" data-search="priority-dot">priority-dot</code><code class="chip" data-search="priority-high">priority-high</code><code class="chip" data-search="priority-low">priority-low</code><code class="chip" data-search="priority-medium">priority-medium</code><code class="chip" data-search="task-check">task-check</code><code class="chip" data-search="task-list">task-list</code><code class="chip" data-search="task-text">task-text</code><code class="chip" data-search="task-time-input">task-time-input</code><code class="chip" data-search="todo-add-row">todo-add-row</code><code class="chip" data-search="todo-input-wrap">todo-input-wrap</code><code class="chip" data-search="todo-item">todo-item</code><code class="chip" data-search="todo-text">todo-text</code><code class="chip" data-search="todo-text-input">todo-text-input</code><code class="chip" data-search="xp-chip">xp-chip</code></div>
+  </section>
+<section class="group">
+    <h2>matrix.css <span class="sub">Матрица Эйзенхауэра</span></h2>
+    <div class="chips"><code class="chip" data-search="add-btn">add-btn</code><code class="chip" data-search="css">css</code><code class="chip" data-search="matrix-quad">matrix-quad</code><code class="chip" data-search="quad-list">quad-list</code><code class="chip" data-search="quad-q1">quad-q1</code><code class="chip" data-search="quad-q2">quad-q2</code><code class="chip" data-search="quad-q3">quad-q3</code><code class="chip" data-search="quad-q4">quad-q4</code><code class="chip" data-search="quad-task">quad-task</code><code class="chip" data-search="quad-task-text">quad-task-text</code><code class="chip" data-search="todo-input-wrap">todo-input-wrap</code><code class="chip" data-search="todo-text-input">todo-text-input</code></div>
+  </section>
+<section class="group">
+    <h2>schedule.css <span class="sub">Расписание на день</span></h2>
+    <div class="chips"><code class="chip" data-search="css">css</code><code class="chip" data-search="day-schedule-item">day-schedule-item</code><code class="chip" data-search="done">done</code><code class="chip" data-search="extra">extra</code><code class="chip" data-search="extra-add-wrap">extra-add-wrap</code><code class="chip" data-search="icon-btn">icon-btn</code><code class="chip" data-search="item-del">item-del</code><code class="chip" data-search="item-subject">item-subject</code><code class="chip" data-search="item-time">item-time</code><code class="chip" data-search="item-time-static">item-time-static</code><code class="chip" data-search="planned">planned</code><code class="chip" data-search="planned-empty">planned-empty</code><code class="chip" data-search="priority-cycle">priority-cycle</code><code class="chip" data-search="sched-sub">sched-sub</code><code class="chip" data-search="schedule-list">schedule-list</code><code class="chip" data-search="xp-chip">xp-chip</code></div>
+  </section>
+<section class="group">
+    <h2>week.css <span class="sub">Экран «Неделя»</span></h2>
+    <div class="chips"><code class="chip" data-search="add-schedule-btn">add-schedule-btn</code><code class="chip" data-search="css">css</code><code class="chip" data-search="day-card">day-card</code><code class="chip" data-search="day-date">day-date</code><code class="chip" data-search="day-header">day-header</code><code class="chip" data-search="day-notes">day-notes</code><code class="chip" data-search="day-notes-area">day-notes-area</code><code class="chip" data-search="day-schedule">day-schedule</code><code class="chip" data-search="schedule-item">schedule-item</code><code class="chip" data-search="today">today</code><code class="chip" data-search="week-meta">week-meta</code><code class="chip" data-search="week-schedule">week-schedule</code><code class="chip" data-search="week-subject">week-subject</code><code class="chip" data-search="week-time">week-time</code></div>
+  </section>
+<section class="group">
+    <h2>notes.css <span class="sub">Блок «Заметки»</span></h2>
+    <div class="chips"><code class="chip" data-search="css">css</code><code class="chip" data-search="empty">empty</code><code class="chip" data-search="notes-area">notes-area</code><code class="chip" data-search="notes-mode-hint">notes-mode-hint</code><code class="chip" data-search="notes-toggle">notes-toggle</code><code class="chip" data-search="notes-yesterday">notes-yesterday</code><code class="chip" data-search="notes-yesterday-head">notes-yesterday-head</code><code class="chip" data-search="notes-yesterday-text">notes-yesterday-text</code></div>
+  </section>
+<section class="group">
+    <h2>pomodoro.css <span class="sub">Блок «Помодоро»</span></h2>
+    <div class="chips"><code class="chip" data-search="active">active</code><code class="chip" data-search="breakDone">breakDone</code><code class="chip" data-search="css">css</code><code class="chip" data-search="done">done</code><code class="chip" data-search="pause">pause</code><code class="chip" data-search="pomodoro-controller">pomodoro-controller</code><code class="chip" data-search="pomodoro-controls">pomodoro-controls</code><code class="chip" data-search="pomodoro-current">pomodoro-current</code><code class="chip" data-search="pomodoro-message">pomodoro-message</code><code class="chip" data-search="pomodoro-minutes">pomodoro-minutes</code><code class="chip" data-search="pomodoro-phase">pomodoro-phase</code><code class="chip" data-search="pomodoro-setting">pomodoro-setting</code><code class="chip" data-search="pomodoro-settings">pomodoro-settings</code><code class="chip" data-search="pomodoro-sound">pomodoro-sound</code><code class="chip" data-search="pomodoro-sound-add">pomodoro-sound-add</code><code class="chip" data-search="pomodoro-sound-extra">pomodoro-sound-extra</code><code class="chip" data-search="pomodoro-sound-hint">pomodoro-sound-hint</code><code class="chip" data-search="pomodoro-sound-row">pomodoro-sound-row</code><code class="chip" data-search="pomodoro-sound-test">pomodoro-sound-test</code><code class="chip" data-search="pomodoro-task-row">pomodoro-task-row</code><code class="chip" data-search="pomodoro-task-text">pomodoro-task-text</code><code class="chip" data-search="pomodoro-tasks">pomodoro-tasks</code><code class="chip" data-search="pomodoro-timer">pomodoro-timer</code><code class="chip" data-search="primary-btn">primary-btn</code><code class="chip" data-search="secondary-btn">secondary-btn</code><code class="chip" data-search="stop">stop</code><code class="chip" data-search="task-check">task-check</code><code class="chip" data-search="workDone">workDone</code><code class="chip" data-search="xp-chip">xp-chip</code></div>
+  </section>
+<section class="group">
+    <h2>goals.css <span class="sub">Цели и блок целей</span></h2>
+    <div class="chips"><code class="chip" data-search="block-action-btn">block-action-btn</code><code class="chip" data-search="checkbox-row">checkbox-row</code><code class="chip" data-search="css">css</code><code class="chip" data-search="delete-goal-btn">delete-goal-btn</code><code class="chip" data-search="done">done</code><code class="chip" data-search="empty">empty</code><code class="chip" data-search="goal-card">goal-card</code><code class="chip" data-search="goal-card-main">goal-card-main</code><code class="chip" data-search="goal-card-meta">goal-card-meta</code><code class="chip" data-search="goal-card-side">goal-card-side</code><code class="chip" data-search="goal-card-title">goal-card-title</code><code class="chip" data-search="goal-confirm-title">goal-confirm-title</code><code class="chip" data-search="goal-detail">goal-detail</code><code class="chip" data-search="goal-due-overdue">goal-due-overdue</code><code class="chip" data-search="goal-form">goal-form</code><code class="chip" data-search="goal-hint">goal-hint</code><code class="chip" data-search="goal-input">goal-input</code><code class="chip" data-search="goal-label">goal-label</code><code class="chip" data-search="goal-picker-due">goal-picker-due</code><code class="chip" data-search="goal-picker-list">goal-picker-list</code><code class="chip" data-search="goal-picker-text">goal-picker-text</code><code class="chip" data-search="goal-row">goal-row</code><code class="chip" data-search="goal-smart">goal-smart</code><code class="chip" data-search="goal-smart-count">goal-smart-count</code><code class="chip" data-search="goal-textarea">goal-textarea</code><code class="chip" data-search="goals-block-due">goals-block-due</code><code class="chip" data-search="goals-block-item">goals-block-item</code><code class="chip" data-search="goals-block-list">goals-block-list</code><code class="chip" data-search="goals-block-title">goals-block-title</code><code class="chip" data-search="goals-head">goals-head</code><code class="chip" data-search="goals-heading">goals-heading</code><code class="chip" data-search="goals-list">goals-list</code><code class="chip" data-search="goals-section-title">goals-section-title</code><code class="chip" data-search="invalid">invalid</code><code class="chip" data-search="overdue">overdue</code><code class="chip" data-search="smart-badge">smart-badge</code><code class="chip" data-search="smart-row">smart-row</code><code class="chip" data-search="smart-text">smart-text</code><code class="chip" data-search="smart-title">smart-title</code><code class="chip" data-search="smart-value">smart-value</code></div>
+  </section>
+<section class="group">
+    <h2>learn.css <span class="sub">Обучение</span></h2>
+    <div class="chips"><code class="chip" data-search="css">css</code><code class="chip" data-search="done">done</code><code class="chip" data-search="learn-progress">learn-progress</code><code class="chip" data-search="learn-progress-fill">learn-progress-fill</code><code class="chip" data-search="learn-progress-label">learn-progress-label</code><code class="chip" data-search="learn-progress-row">learn-progress-row</code><code class="chip" data-search="learn-progress-track">learn-progress-track</code><code class="chip" data-search="learn-progress-xp">learn-progress-xp</code><code class="chip" data-search="lesson-actions">lesson-actions</code><code class="chip" data-search="lesson-modal">lesson-modal</code><code class="chip" data-search="lesson-outcome">lesson-outcome</code><code class="chip" data-search="lesson-tagline">lesson-tagline</code><code class="chip" data-search="lesson-toggle">lesson-toggle</code><code class="chip" data-search="lesson-topics">lesson-topics</code><code class="chip" data-search="month-badge">month-badge</code><code class="chip" data-search="primary-btn">primary-btn</code><code class="chip" data-search="secondary-btn">secondary-btn</code><code class="chip" data-search="step-card">step-card</code><code class="chip" data-search="step-card-main">step-card-main</code><code class="chip" data-search="step-card-side">step-card-side</code><code class="chip" data-search="step-card-title">step-card-title</code><code class="chip" data-search="step-desc">step-desc</code><code class="chip" data-search="step-open">step-open</code><code class="chip" data-search="step-status">step-status</code><code class="chip" data-search="step-topics">step-topics</code><code class="chip" data-search="steps-list">steps-list</code><code class="chip" data-search="subtitle">subtitle</code></div>
+  </section>
+<section class="group">
+    <h2>review.css <span class="sub">Итоги месяца</span></h2>
+    <div class="chips"><code class="chip" data-search="css">css</code><code class="chip" data-search="empty">empty</code><code class="chip" data-search="empty-hint">empty-hint</code><code class="chip" data-search="history-card">history-card</code><code class="chip" data-search="history-edit">history-edit</code><code class="chip" data-search="history-field">history-field</code><code class="chip" data-search="history-head">history-head</code><code class="chip" data-search="history-label">history-label</code><code class="chip" data-search="history-title">history-title</code><code class="chip" data-search="history-value">history-value</code><code class="chip" data-search="review-form">review-form</code><code class="chip" data-search="review-month-controls">review-month-controls</code><code class="chip" data-search="review-month-row">review-month-row</code><code class="chip" data-search="review-select">review-select</code><code class="chip" data-search="review-status">review-status</code><code class="chip" data-search="selected">selected</code><code class="chip" data-search="warn">warn</code></div>
+  </section>
+<section class="group">
+    <h2>modals.css <span class="sub">Модалки</span></h2>
+    <div class="chips"><code class="chip" data-search="css">css</code><code class="chip" data-search="hidden">hidden</code><code class="chip" data-search="modal">modal</code><code class="chip" data-search="modal-content">modal-content</code><code class="chip" data-search="picker-option">picker-option</code></div>
+  </section>
+<section class="group">
+    <h2>settings.css <span class="sub">Настройки</span></h2>
+    <div class="chips"><code class="chip" data-search="active">active</code><code class="chip" data-search="css">css</code><code class="chip" data-search="danger-btn">danger-btn</code><code class="chip" data-search="modal-content">modal-content</code><code class="chip" data-search="ok">ok</code><code class="chip" data-search="secondary-btn">secondary-btn</code><code class="chip" data-search="settings-close">settings-close</code><code class="chip" data-search="settings-head">settings-head</code><code class="chip" data-search="settings-hint">settings-hint</code><code class="chip" data-search="settings-input">settings-input</code><code class="chip" data-search="settings-label">settings-label</code><code class="chip" data-search="settings-modal">settings-modal</code><code class="chip" data-search="settings-row">settings-row</code><code class="chip" data-search="settings-section">settings-section</code><code class="chip" data-search="settings-select">settings-select</code><code class="chip" data-search="settings-status">settings-status</code><code class="chip" data-search="sound-add-row">sound-add-row</code><code class="chip" data-search="sound-del">sound-del</code><code class="chip" data-search="sound-file">sound-file</code><code class="chip" data-search="sound-info">sound-info</code><code class="chip" data-search="sound-name">sound-name</code><code class="chip" data-search="sound-play">sound-play</code><code class="chip" data-search="sound-row">sound-row</code><code class="chip" data-search="sound-size">sound-size</code><code class="chip" data-search="sounds-list">sounds-list</code><code class="chip" data-search="theme-css">theme-css</code><code class="chip" data-search="theme-custom">theme-custom</code><code class="chip" data-search="theme-delete">theme-delete</code><code class="chip" data-search="theme-option">theme-option</code><code class="chip" data-search="theme-options">theme-options</code><code class="chip" data-search="warn">warn</code></div>
+  </section>
+<section class="group">
+    <h2>timer-alert.css <span class="sub">Оверлей таймера</span></h2>
+    <div class="chips"><code class="chip" data-search="css">css</code><code class="chip" data-search="primary-btn">primary-btn</code><code class="chip" data-search="secondary-btn">secondary-btn</code><code class="chip" data-search="timer-alert">timer-alert</code><code class="chip" data-search="timer-alert-card">timer-alert-card</code><code class="chip" data-search="timer-alert-emoji">timer-alert-emoji</code><code class="chip" data-search="timer-alert-text">timer-alert-text</code></div>
+  </section>
+<section class="group">
+    <h2>themes.css <span class="sub">Тёмная тема</span></h2>
+    <div class="chips"><code class="chip" data-search="active">active</code><code class="chip" data-search="breakDone">breakDone</code><code class="chip" data-search="css">css</code><code class="chip" data-search="done">done</code><code class="chip" data-search="learn-progress-fill">learn-progress-fill</code><code class="chip" data-search="lesson-toggle">lesson-toggle</code><code class="chip" data-search="modal-content">modal-content</code><code class="chip" data-search="pomodoro-message">pomodoro-message</code><code class="chip" data-search="step-status">step-status</code><code class="chip" data-search="theme-option">theme-option</code><code class="chip" data-search="workDone">workDone</code></div>
+  </section>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var input = document.getElementById('search');
+    var empty = document.getElementById('empty');
+    var groups = document.getElementById('groups');
+    var cards = Array.prototype.slice.call(groups.querySelectorAll('.group'));
+
+    function filter() {
+      var q = String(input.value || '').trim().toLowerCase();
+      var any = false;
+      cards.forEach(function (card) {
+        var hit = false;
+        var chips = Array.prototype.slice.call(card.querySelectorAll('.chip'));
+        chips.forEach(function (chip) {
+          var text = (chip.getAttribute('data-search') || '') + ' ' + chip.textContent;
+          var show = !q || text.toLowerCase().indexOf(q) !== -1;
+          chip.classList.toggle('hidden', !show);
+          if (show) hit = true;
+        });
+        card.classList.toggle('hidden', !hit);
+        if (hit) any = true;
+      });
+      empty.classList.toggle('hidden', any);
+    }
+
+    if (input) {
+      input.addEventListener('input', filter);
+      input.addEventListener('search', filter);
+      filter();
+    }
+  })();
+</script>
+</body>
+</html>

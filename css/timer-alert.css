@@ -1,0 +1,68 @@
+/* timer-alert.css — оверлей по окончании фазы помодоро. */
+.timer-alert {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: var(--overlay);
+  backdrop-filter: blur(3px);
+  touch-action: none;
+  overscroll-behavior: contain;
+  animation: timer-alert-fade 0.18s ease-out;
+}
+
+.timer-alert-card {
+  width: min(92vw, 380px);
+  padding: 24px 20px 18px;
+  border-radius: 22px;
+  background: var(--card);
+  color: var(--text);
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  animation: timer-alert-pop 0.22s ease-out;
+}
+
+.timer-alert-emoji {
+  font-size: 3rem;
+  line-height: 1;
+  animation: timer-alert-ring 0.9s ease-in-out infinite;
+}
+
+.timer-alert-card h2 {
+  margin: 10px 0 6px;
+  font-size: 1.2rem;
+}
+
+.timer-alert-text {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.timer-alert-card .primary-btn { margin-top: 0; }
+.timer-alert-card .secondary-btn { margin-top: 8px; }
+
+@keyframes timer-alert-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes timer-alert-pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes timer-alert-ring {
+  0%, 60%, 100% { transform: rotate(0); }
+  70% { transform: rotate(-10deg); }
+  80% { transform: rotate(10deg); }
+  90% { transform: rotate(-6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timer-alert,
+  .timer-alert-card,
+  .timer-alert-emoji { animation: none; }
+}

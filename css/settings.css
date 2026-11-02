@@ -1,0 +1,219 @@
+/* settings.css — модалка настроек: разделы, экспорт и темы. */
+.settings-modal .modal-content {
+  width: min(94vw, 470px);
+  max-height: 88vh;
+  padding: 20px;
+}
+
+.settings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.settings-head h2 { margin: 0; }
+
+.settings-close {
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.settings-close:hover { background: var(--surface-soft); color: var(--text); }
+
+.settings-section {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.settings-section h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.settings-hint {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.settings-label {
+  display: block;
+  margin: 10px 0 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.settings-select,
+.settings-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  font: inherit;
+  font-size: 0.9rem;
+  background: var(--card);
+  color: var(--text);
+}
+
+.settings-row { margin-top: 8px; }
+.settings-row .settings-label:first-child { margin-top: 0; }
+
+.settings-status {
+  min-height: 1.2em;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.settings-status.ok { color: var(--accent); }
+.settings-status.warn { color: var(--splash); }
+
+/* ===== Темы ===== */
+.theme-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.theme-option {
+  flex: 1 1 30%;
+  min-width: 92px;
+  padding: 10px 8px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.theme-option.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.theme-custom { margin-top: 10px; }
+
+.theme-custom summary {
+  min-height: 40px;
+  padding: 10px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.theme-css {
+  width: 100%;
+  min-height: 130px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  background: var(--card);
+  color: var(--text);
+  resize: vertical;
+}
+
+.theme-delete { color: var(--danger); }
+
+/* ===== Свои звуки будильника ===== */
+.sound-add-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.sound-file {
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.sound-add-row .secondary-btn {
+  flex-shrink: 0;
+  width: auto;
+  margin-top: 0;
+  padding: 10px 12px;
+}
+
+.sounds-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.sound-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+
+.sound-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sound-name {
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+
+.sound-size {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.sound-play,
+.sound-del {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.sound-del { color: var(--danger); }
+
+/* Опасное действие: удаление всех данных */
+.danger-btn {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--danger);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-height: 44px;
+}
+
+.danger-btn:disabled { opacity: 0.6; }
+
+.settings-hint a { color: var(--accent); text-decoration: underline; }

@@ -50,6 +50,25 @@
   // ===== Помодоро =====
   const POMODORO_DEFAULTS = { work: 25, break: 5 };
 
+  // Звук, который играет по окончании фазы таймера (выбирается в редактировании блока)
+  const POMODORO_SOUND_DEFAULT = 'alarm';
+  const POMODORO_SOUNDS = [
+    { value: 'alarm', label: 'Марш Тореадора' },
+    { value: 'soft', label: 'Grandfather clock' },
+    { value: 'beep', label: 'Короткий бип' },
+    { value: 'none', label: 'Без звука' }
+  ];
+
+  // Свои звуки хранятся в браузере (IndexedDB) под ключом custom:<id>
+  const CUSTOM_SOUND_PREFIX = 'custom:';
+  const isPomodoroSound = (value) => typeof value === 'string'
+    && (POMODORO_SOUNDS.some(item => item.value === value)
+      || /^custom:[a-z0-9_-]{4,40}$/i.test(value));
+
+  // ===== Темы =====
+  const THEME_MODES = ['light', 'dark', 'custom'];
+  const DEFAULT_THEME = { mode: 'light', customName: '', customCSS: '' };
+
   const POMODORO_MESSAGES = {
     start: [
       'Погнали! Таймер запущен — и ты вместе с ним.',
@@ -168,26 +187,38 @@
   }
 
   const BLOCK_TYPES = [
-    { type: 'todo', label: 'Список дел', defaultData: () => [] },
-    { type: 'matrix', label: 'Матрица Эйзенхауэра', defaultData: createEmptyMatrix },
-    { type: 'notes', label: 'Заметки', defaultData: () => '' },
-    { type: 'schedule', label: 'Расписание на день', defaultData: () => ({}) },
-    { type: 'pomodoro', label: 'Помодоро', defaultData: () => ({}) },
-    { type: 'goals', label: 'Цели', defaultData: () => ({ ids: [] }) }
+    { type: 'todo', label: 'Список дел', defaultData: () => [], defaultSettings: () => ({}) },
+    { type: 'matrix', label: 'Матрица Эйзенхауэра', defaultData: createEmptyMatrix, defaultSettings: () => ({}) },
+    {
+      type: 'notes',
+      label: 'Заметки',
+      defaultData: () => '',
+      // в редактировании блока: показать вчерашние заметки / включить общие заметки
+      defaultSettings: () => ({ showYesterday: false, permanent: false })
+    },
+    { type: 'schedule', label: 'Расписание на день', defaultData: () => ({}), defaultSettings: () => ({}) },
+    { type: 'pomodoro', label: 'Помодоро', defaultData: () => ({}), defaultSettings: () => ({}) },
+    { type: 'goals', label: 'Цели', defaultData: () => ({ ids: [] }), defaultSettings: () => ({}) }
   ];
 
   // ===== Состояние по умолчанию =====
   function createDefaultState() {
     return {
+      // При первом запуске на главной только самое нужное:
+      // список дел, расписание дня, цели и заметки. Матрица и помодоро — в «Добавить блок».
       blocks: [
-        { id: 'todo-1', type: 'todo', title: 'Список дел', data: [] },
-        { id: 'matrix-1', type: 'matrix', title: 'Матрица Эйзенхауэра', data: createEmptyMatrix() },
-        { id: 'notes-1', type: 'notes', title: 'Заметки', data: '' },
-        { id: 'schedule-1', type: 'schedule', title: 'Расписание на день', data: {} },
-        { id: 'pomodoro-1', type: 'pomodoro', title: 'Помодоро', data: {} },
-        { id: 'goals-1', type: 'goals', title: 'Цели', data: { ids: [] } }
+        { id: 'todo-1', type: 'todo', title: 'Список дел', data: [], settings: {} },
+        { id: 'schedule-1', type: 'schedule', title: 'Расписание на день', data: {}, settings: {} },
+        { id: 'goals-1', type: 'goals', title: 'Цели', data: { ids: [] }, settings: {} },
+        {
+          id: 'notes-1',
+          type: 'notes',
+          title: 'Заметки',
+          data: '',
+          settings: { showYesterday: false, permanent: false }
+        }
       ],
-      order: ['todo-1', 'matrix-1', 'schedule-1', 'pomodoro-1', 'goals-1', 'notes-1'],
+      order: ['todo-1', 'schedule-1', 'goals-1', 'notes-1'],
       hidden: [],
       xp: 0,
       streak: 0,
@@ -197,13 +228,20 @@
       editingMode: false,
       weekSchedule: { mon: [], tue: [], wed: [], thu: [], fri: [], sat: [], sun: [] },
       dayNotes: {},
+      // общие заметки: один текст на все дни, не привязан к дате
+      permanentNotes: '',
       dailyTasks: {},
       monthReviews: [],
       goals: [],
+      theme: { ...DEFAULT_THEME },
       pomodoro: {
         tasks: [],
         activeTaskId: null,
-        settings: { work: POMODORO_DEFAULTS.work, break: POMODORO_DEFAULTS.break },
+        settings: {
+          work: POMODORO_DEFAULTS.work,
+          break: POMODORO_DEFAULTS.break,
+          sound: POMODORO_SOUND_DEFAULT
+        },
         phase: 'work',
         endAt: null,
         remaining: POMODORO_DEFAULTS.work * 60,
@@ -232,7 +270,13 @@
     QUADRANTS,
     GOAL_SMART_FIELDS,
     POMODORO_DEFAULTS,
+    POMODORO_SOUND_DEFAULT,
+    POMODORO_SOUNDS,
+    CUSTOM_SOUND_PREFIX,
+    isPomodoroSound,
     POMODORO_MESSAGES,
+    THEME_MODES,
+    DEFAULT_THEME,
     SPLASHES,
     DAYS_OF_WEEK,
     DAY_FULL_NAMES,

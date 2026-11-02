@@ -5,10 +5,10 @@
   margin-bottom: 8px;
   min-width: 0;
 }
-.quad-q1 { background: #fef2f2; }
-.quad-q2 { background: #fffbeb; }
-.quad-q3 { background: #eff6ff; }
-.quad-q4 { background: #f8fafc; }
+.quad-q1 { background: var(--quad-q1); }
+.quad-q2 { background: var(--quad-q2); }
+.quad-q3 { background: var(--quad-q3); }
+.quad-q4 { background: var(--quad-q4); }
 
 .matrix-quad summary {
   font-weight: 600;
@@ -24,7 +24,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--quad-border);
   min-width: 0;
 }
 

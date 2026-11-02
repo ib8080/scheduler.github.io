@@ -1,4 +1,5 @@
-/* header.js — шапка дашборда: текущая дата, выбор даты, кнопка редактирования. */
+/* header.js — шапка дашборда: текущая дата, выбор даты и кнопка настроек.
+   В режиме редактирования кнопка настроек превращается в «Готово». */
 (function (App) {
   'use strict';
 
@@ -38,23 +39,33 @@
     };
   }
 
-  function updateEditButton() {
-    const btn = document.getElementById('edit-mode-toggle');
+  function updateSettingsButton() {
+    const btn = document.getElementById('settings-btn');
     if (!btn) return;
-    btn.textContent = App.state.editingMode ? '✓ Готово' : '✎ Редактировать';
-    btn.classList.toggle('active', App.state.editingMode);
+
+    const editing = Boolean(App.state.editingMode);
+    btn.textContent = editing ? '✓ Готово' : '⚙';
+    btn.classList.toggle('active', editing);
+    btn.setAttribute('aria-label', editing ? 'Завершить редактирование' : 'Настройки');
+    btn.title = editing ? 'Завершить редактирование' : 'Настройки';
   }
 
   function render() {
     renderSplash();
     renderCurrentDate();
     renderDatePicker();
-    updateEditButton();
+    updateSettingsButton();
   }
 
   // Подставляем подсказку сразу при загрузке скрипта, не дожидаясь init
   renderSplash();
 
   App.ui = App.ui || {};
-  App.ui.header = { render, renderSplash, renderCurrentDate, renderDatePicker, updateEditButton };
+  App.ui.header = {
+    render,
+    renderSplash,
+    renderCurrentDate,
+    renderDatePicker,
+    updateSettingsButton
+  };
 })(window.App = window.App || {});

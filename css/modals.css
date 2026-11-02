@@ -1,8 +1,9 @@
 /* modals.css — модалки: выбор блока и урок. */
 .modal {
   position: fixed;
+  overscroll-behavior: contain;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--overlay);
   display: grid;
   place-items: center;
   z-index: 100;
@@ -11,7 +12,8 @@
 .modal.hidden { display: none; }
 
 .modal-content {
-  background: white;
+  background: var(--card);
+  color: var(--text);
   border-radius: 20px;
   padding: 20px;
   width: min(92vw, 400px);
@@ -28,11 +30,12 @@
   margin-bottom: 8px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: white;
+  background: var(--card);
+  color: var(--text);
   font-size: 0.9rem;
   transition: background 0.2s;
 }
-.picker-option:hover { background: #f8fafc; }
+.picker-option:hover { background: var(--surface-soft); }
 
 #close-picker {
   width: 100%;

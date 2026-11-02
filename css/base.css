@@ -11,6 +11,17 @@
   --radius: 18px;
   --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
   --page-padding: 16px;
+  /* мягкие поверхности и служебные цвета — их переопределяют темы */
+  --surface-soft: #f8fafc;
+  --track: #e2e8f0;
+  --splash: #b45309;
+  --overlay: rgba(15, 23, 42, 0.45);
+  --quad-border: rgba(15, 23, 42, 0.06);
+  /* квадранты матрицы: в тёмной теме переопределяются */
+  --quad-q1: #fef2f2;
+  --quad-q2: #fffbeb;
+  --quad-q3: #eff6ff;
+  --quad-q4: #f8fafc;
 }
 
 * { box-sizing: border-box; }
@@ -50,9 +61,28 @@ button {
   color: inherit;
 }
 
-input, textarea, select { max-width: 100%; }
+input, textarea, select { max-width: 100%; color: var(--text); }
+
+/* Поля ввода — цвета темы, иначе в тёмной теме они остаются белыми */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea,
+select {
+  background-color: var(--card);
+  color: var(--text);
+}
 
 .hidden { display: none !important; }
+
+/* Пока открыт оверлей/модалка, страница под ними не прокручивается */
+html.overlay-open,
+body.overlay-open { overflow: hidden; }
+
+body.overlay-open {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
 
 /* Общие кнопки-действия */
 .primary-btn {
@@ -95,7 +125,7 @@ input, textarea, select { max-width: 100%; }
 
 /* Случайная подсказка-«сплэш» как на титульном экране Minecraft */
 .splash {
-  color: #b45309;
+  color: var(--splash);
   font-weight: 800;
   transform: rotate(-1.5deg);
   transform-origin: left center;
@@ -127,21 +157,26 @@ input, textarea, select { max-width: 100%; }
   min-height: 40px;
   min-width: 0;
   color: var(--text);
+  background: var(--card);
 }
 
-#edit-mode-toggle {
+#settings-btn {
   background: var(--accent-soft);
   color: var(--accent);
   border-radius: 12px;
   padding: 8px 12px;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  line-height: 1.1;
+  min-height: 40px;
+  min-width: 44px;
   white-space: nowrap;
   transition: background 0.2s, color 0.2s;
 }
-#edit-mode-toggle.active {
+#settings-btn.active {
   background: var(--accent);
   color: white;
+  font-size: 0.85rem;
 }
 
 /* ===== XP-бар ===== */
@@ -157,7 +192,7 @@ input, textarea, select { max-width: 100%; }
   flex: 1;
   min-width: 0;
   height: 8px;
-  background: #e2e8f0;
+  background: var(--track);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -174,10 +209,19 @@ input, textarea, select { max-width: 100%; }
   position: fixed;
   bottom: 0; left: 0; right: 0;
   display: flex;
+  /* не чистая card, а лёгкий микс с фоном: панель не выглядит чужой полосой */
   background: var(--card);
+  background: color-mix(in srgb, var(--card) 82%, var(--bg));
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   border-top: 1px solid var(--border);
   padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.06);
   z-index: 20;
+}
+
+html[data-theme="dark"] .bottom-nav {
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .bottom-nav button {
@@ -186,6 +230,13 @@ input, textarea, select { max-width: 100%; }
   font-size: 0.72rem;
   color: var(--muted);
   min-height: 48px;
+  border-radius: 10px;
+  transition: color 0.2s, background 0.2s;
 }
 
-.bottom-nav button.active { color: var(--accent); font-weight: 600; }
+.bottom-nav button.active {
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--accent-soft);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}

@@ -52,7 +52,7 @@
   border-radius: 6px;
   min-height: 36px;
 }
-.tool-btn:hover { background: #f1f5f9; }
+.tool-btn:hover { background: var(--surface-soft); }
 
 .handle {
   cursor: grab;
